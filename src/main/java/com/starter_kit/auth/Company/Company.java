@@ -12,24 +12,42 @@ public class Company {
     @Id
     public String id;
     public String name;
-    public List<String> users;
+    public User creator;
+    public List<User> users;
     public List<String> teams;
 
     public Company() {}
 
-    public Company(String name) { this.name = name; }
+    public Company(String name, User creator) {
+        this.name = name;
+        this.creator = creator;
+    }
 
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public List<String> getUsers() { return users; }
+    public List<User> getUsers() {
+        return users;
+    }
 
-    public void setUsers(User users) { this.users.add(users.getId()); }
+    public void setUsers(User users) {
+        this.users.add(users);
+    }
 
-    public List<String> getTeams() { return teams; }
+    public List<String> getTeams() {
+        return teams;
+    }
 
-    public void setTeams(Team teams) { this.teams.add(teams.getId()); }
+    public void setTeams(Team teams) {
+        this.teams.add(teams.getId());
+    }
 }
