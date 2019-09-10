@@ -21,7 +21,7 @@ public class CompanyController {
 
     @PostMapping(value = "/{id}/{userId}")
     public Company addUser(@PathVariable String id, @PathVariable String userId) {
-        return companyService.addUser(id, userId);
+        return companyService.addUser(id, userId); 
     }
 
     @DeleteMapping(value = "/{id}/{userId}")
