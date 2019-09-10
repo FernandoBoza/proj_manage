@@ -13,10 +13,6 @@ public class CompanyController {
     @Autowired
     CompanyService companyService;
 
-    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Company createCompany(@RequestBody Company company) {
-        return companyService.createCompany(company);
-    }
 
     @GetMapping(value = "/{id}")
     public Company findCompanyById(@PathVariable String id) {

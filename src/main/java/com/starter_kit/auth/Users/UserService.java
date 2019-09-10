@@ -1,5 +1,7 @@
 package com.starter_kit.auth.Users;
 
+import com.starter_kit.auth.Company.Company;
+import com.starter_kit.auth.Company.CompanyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,12 +23,16 @@ import static com.starter_kit.auth.Utils.Constants.*;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
+    private final CompanyRepo companyRepo;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo, CompanyRepo companyRepo) {
         this.userRepo = userRepo;
+        this.companyRepo = companyRepo;
+
     }
 
     public User createUser(User user) {
@@ -82,4 +88,16 @@ public class UserService implements UserDetailsService {
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
+
+    public Company createCompany(String userId,Company company) {
+        User u = findById(userId);
+        if (u.getCompanyID() == null && u.getRole().equals(ADMIN)){
+            companyRepo.save(company);
+            u.setCompanyID(company.getId());
+            return company;
+        } else {
+            return null;
+        }
+    }
+
 }

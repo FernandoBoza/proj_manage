@@ -22,10 +22,6 @@ public class CompanyService {
         this.userRepo = userRepo;
     }
 
-    public Company createCompany(Company company) {
-        return companyRepo.save(company);
-    }
-
     public Company findCompanyById(String id) {
         return getFromOptional(companyRepo.findById(id));
     }
