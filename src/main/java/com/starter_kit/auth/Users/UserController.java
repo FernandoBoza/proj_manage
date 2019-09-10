@@ -30,8 +30,8 @@ public class UserController {
         return userService.findUserByName(name);
     }
 
-    @PostMapping(value = "{id}/company", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(value = "id/{id}/company", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Company createCompany(@PathVariable String id, @RequestBody Company company) {
-        return userService.createCompany(id ,company);
+        return userService.createCompany(company);
     }
 }

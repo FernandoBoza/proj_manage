@@ -1,6 +1,7 @@
 package com.starter_kit.auth;
 
 import com.starter_kit.auth.Auth.CustomizeAuthenticationSuccessHandler;
+import com.starter_kit.auth.Company.CompanyRepo;
 import com.starter_kit.auth.Users.UserRepo;
 import com.starter_kit.auth.Users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,12 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserRepo userRepo;
 
+    @Autowired
+    CompanyRepo companyRepo;
+
     @Bean
     public UserDetailsService mongoUserDetails() {
-        return new UserService(userRepo);
+        return new UserService(userRepo, companyRepo);
     }
 
     @Override

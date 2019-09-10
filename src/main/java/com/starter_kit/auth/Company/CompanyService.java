@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static com.starter_kit.auth.Utils.Utils.getFromOptional;
 
@@ -23,15 +25,16 @@ public class CompanyService {
     }
 
     public Company findCompanyById(String id) {
-        return getFromOptional(companyRepo.findById(id));
+        return companyRepo.findCompanyById(id);
     }
 
 //    TODO: Work on this logic
-    public List<User> addUser(String compId, String userId) {
+    public Company addUser(String compId, String userId) {
         User user = getFromOptional(userRepo.findById(userId));
         Company c = getFromOptional(companyRepo.findById(compId));
-        c.setUsers(user);
-        return c.getUsers();
+        c.add(user);
+        user.setCompanyID(compId);
+        return companyRepo.save(c);
     }
 
     public String removeUser(String compId, String userId) {

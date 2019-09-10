@@ -89,11 +89,14 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 
-    public Company createCompany(String userId,Company company) {
-        User u = findById(userId);
-        if (u.getCompanyID() == null && u.getRole().equals(ADMIN)){
+    public Company createCompany(Company company) {
+        User u = findById(company.getCreator());
+        if (u.getCompanyID() == null && u.getRole().equals(ADMIN)) {
             companyRepo.save(company);
             u.setCompanyID(company.getId());
+            userRepo.save(u);
+            company.add(u);
+            companyRepo.save(company);
             return company;
         } else {
             return null;
