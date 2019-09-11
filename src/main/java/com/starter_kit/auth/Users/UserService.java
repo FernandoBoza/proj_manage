@@ -96,8 +96,7 @@ public class UserService implements UserDetailsService {
             u.setCompanyID(company.getId());
             userRepo.save(u);
             company.add(u);
-            companyRepo.save(company);
-            return company;
+            return companyRepo.save(company);
         } else {
             return null;
         }
