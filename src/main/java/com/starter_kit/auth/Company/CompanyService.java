@@ -33,12 +33,7 @@ public class CompanyService {
     public Company addUser(String compId, String userId) {
         User user = getFromOptional(userRepo.findById(userId));
         Company c = getFromOptional(companyRepo.findById(compId));
-        List<String> ids = new ArrayList<>();
-        for (User u : c.getUsers()) {
-            ids.add(u.getId());
-        }
-
-        if (!ids.contains(userId)) {
+        if (!c.getUsers().contains(user)) {
             c.add(user);
             user.setCompanyID(compId);
             userRepo.save(user);
@@ -51,10 +46,14 @@ public class CompanyService {
     public Company removeUser(String compId, String userId) {
         User user = getFromOptional(userRepo.findById(userId));
         Company c = getFromOptional(companyRepo.findById(compId));
-        c.removeUser(user);
         user.setCompanyID(null);
         userRepo.save(user);
-        return companyRepo.save(c);
+        if (c.getUsers().contains(user)) {
+            c.removeUser(user);
+            return companyRepo.save(c);
+        } else {
+            return null;
+        }
     }
 
 }

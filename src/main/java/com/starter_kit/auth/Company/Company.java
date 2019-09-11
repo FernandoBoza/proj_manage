@@ -17,22 +17,6 @@ public class Company {
     public List<User> users = new ArrayList<>();
     public List<String> teams;
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Company)) return false;
-
-        Company company = (Company) o;
-
-        return getUsers().equals(company.getUsers());
-    }
-
-    @Override
-    public int hashCode() {
-        return getUsers().hashCode();
-    }
-
     public Company() {}
 
     public Company(String name, String creator) {
@@ -65,8 +49,7 @@ public class Company {
     }
 
     public void removeUser(User user) {
-        System.out.println(this.users.contains(user));
-//        this.users.remove(user);
+        this.users.remove(user);
     }
 
     public List<String> getTeams() {
