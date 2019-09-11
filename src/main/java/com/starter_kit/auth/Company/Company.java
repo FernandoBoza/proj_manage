@@ -5,6 +5,7 @@ import com.starter_kit.auth.Users.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document
@@ -12,13 +13,13 @@ public class Company {
     @Id
     public String id;
     public String name;
-    public User creator;
-    public List<User> users;
+    public String creator;
+    public List<User> users = new ArrayList<>();
     public List<String> teams;
 
     public Company() {}
 
-    public Company(String name, User creator) {
+    public Company(String name, String creator) {
         this.name = name;
         this.creator = creator;
     }
@@ -39,15 +40,31 @@ public class Company {
         return users;
     }
 
-    public void setUsers(User users) {
-        this.users.add(users);
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public void add(User user) {
+        this.users.add(user);
+    }
+
+    public void removeUser(User user) {
+        this.users.remove(user);
     }
 
     public List<String> getTeams() {
         return teams;
     }
 
-    public void setTeams(Team teams) {
-        this.teams.add(teams.getId());
+    public void setTeams(List<String> team) {
+        this.teams = team;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

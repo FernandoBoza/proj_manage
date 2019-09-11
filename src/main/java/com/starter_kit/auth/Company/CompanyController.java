@@ -20,12 +20,12 @@ public class CompanyController {
     }
 
     @PostMapping(value = "/{id}/{userId}")
-    public List<User> addUser(@PathVariable String id, @PathVariable String userId) {
+    public Company addUser(@PathVariable String id, @PathVariable String userId) {
         return companyService.addUser(id, userId);
     }
 
-    @PostMapping(value = "/{id}/{userId}")
-    public String removeUser(@PathVariable String id, @PathVariable String userId) {
+    @DeleteMapping(value = "/{id}/{userId}")
+    public Company removeUser(@PathVariable String id, @PathVariable String userId) {
         return companyService.removeUser(id, userId);
     }
 }
