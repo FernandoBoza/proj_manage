@@ -1,6 +1,5 @@
 package com.starter_kit.auth.Users;
 
-import com.starter_kit.auth.Company.Company;
 import com.starter_kit.auth.Company.CompanyRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,14 +15,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.starter_kit.auth.Utils.Utils.*;
-import static com.starter_kit.auth.Utils.Constants.*;
+import static com.starter_kit.auth.Utils.Constants.ADMIN;
+import static com.starter_kit.auth.Utils.Constants.USER;
+import static com.starter_kit.auth.Utils.Utils.getFromOptional;
 
 
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
-    private final CompanyRepo companyRepo;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -31,7 +30,6 @@ public class UserService implements UserDetailsService {
     @Autowired
     public UserService(UserRepo userRepo, CompanyRepo companyRepo) {
         this.userRepo = userRepo;
-        this.companyRepo = companyRepo;
 
     }
 
@@ -87,19 +85,6 @@ public class UserService implements UserDetailsService {
 
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
-    }
-
-    public Company createCompany(Company company) {
-        User u = findById(company.getCreator());
-        if (u.getCompanyID() == null && u.getRole().equals(ADMIN)) {
-            companyRepo.save(company);
-            u.setCompanyID(company.getId());
-            userRepo.save(u);
-            company.add(u);
-            return companyRepo.save(company);
-        } else {
-            return null;
-        }
     }
 
 }

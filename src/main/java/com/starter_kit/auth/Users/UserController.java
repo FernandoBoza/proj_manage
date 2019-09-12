@@ -1,6 +1,7 @@
 package com.starter_kit.auth.Users;
 
 import com.starter_kit.auth.Company.Company;
+import com.starter_kit.auth.Company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,9 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    CompanyService companyService;
 
 
     @GetMapping(path = "")
@@ -32,6 +36,6 @@ public class UserController {
 
     @PostMapping(value = "id/{id}/company", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Company createCompany(@PathVariable String id, @RequestBody Company company) {
-        return userService.createCompany(company);
+        return companyService.createCompany(id , company);
     }
 }

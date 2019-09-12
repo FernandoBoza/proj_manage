@@ -1,11 +1,7 @@
 package com.starter_kit.auth.Company;
 
-import com.starter_kit.auth.Users.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/company")

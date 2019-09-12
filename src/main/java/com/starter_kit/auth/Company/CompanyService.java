@@ -1,17 +1,11 @@
 package com.starter_kit.auth.Company;
 
-import com.starter_kit.auth.Company.Teams.Team;
 import com.starter_kit.auth.Users.User;
 import com.starter_kit.auth.Users.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
+import static com.starter_kit.auth.Utils.Constants.ADMIN;
 import static com.starter_kit.auth.Utils.Utils.getFromOptional;
 
 @Service
@@ -25,6 +19,20 @@ public class CompanyService {
         this.userRepo = userRepo;
     }
 
+    public Company createCompany(String user_id, Company company) {
+        User u = getFromOptional(userRepo.findById(user_id));
+        if (u.getCompanyID() == null && u.getRole().equals(ADMIN)) {
+            company.setCreator(user_id);
+            companyRepo.save(company);
+            u.setCompanyID(company.getId());
+            userRepo.save(u);
+            company.addUser(u);
+            return companyRepo.save(company);
+        } else {
+            return null;
+        }
+    }
+
     public Company findCompanyById(String id) {
         return companyRepo.findCompanyById(id);
     }
@@ -34,7 +42,7 @@ public class CompanyService {
         User user = getFromOptional(userRepo.findById(userId));
         Company c = getFromOptional(companyRepo.findById(compId));
         if (!c.getUsers().contains(user)) {
-            c.add(user);
+            c.addUser(user);
             user.setCompanyID(compId);
             userRepo.save(user);
             return companyRepo.save(c);
