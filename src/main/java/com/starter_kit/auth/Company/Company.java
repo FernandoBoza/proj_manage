@@ -15,6 +15,7 @@ public class Company {
     private String id;
     private String name;
     private String creator;
+    @DBRef
     private List<User> users = new ArrayList<>();
     @DBRef
     private List<Team> teams = new ArrayList<>();
