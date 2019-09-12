@@ -1,8 +1,10 @@
 package com.starter_kit.auth.Company.Teams.Projects;
 
+import com.starter_kit.auth.Users.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,15 +13,16 @@ public class Task {
     @Id
     private String id;
     private String name;
+    private User creator;
+    private User assignee;
     private Date dueDate;
     private String description;
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     public Task() {}
 
-    public Task(String name, Date dueDate) {
+    public Task(String name) {
         this.name = name;
-        this.dueDate = dueDate;
     }
 
     public String getId() { return id; }
@@ -38,5 +41,5 @@ public class Task {
 
     public List<Comment> getComments() { return comments; }
 
-    public void setComments(Comment comments) { this.comments.add(comments); }
+    public void setComments(List<Comment> comments) { this.comments = comments; }
 }

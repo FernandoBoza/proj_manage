@@ -50,9 +50,7 @@ public class Company {
         this.users.add(user);
     }
 
-    public void removeUser(User user) {
-        this.users.remove(user);
-    }
+    public void removeUser(User user) { this.users.remove(user); }
 
     public List<Team> getTeams() {
         return teams;

@@ -34,7 +34,6 @@ public class TeamService {
         if (u.getCompanyID().equals(comp_id)) {
             team.setCreator(user_id);
             team.addUser(u);
-            teamRepo.save(team);
             c.addTeam(team);
             companyRepo.save(c);
             return team;
@@ -63,4 +62,7 @@ public class TeamService {
     }
 
 
+    public Team findTeamById(String id) {
+        return getFromOptional(teamRepo.findById(id));
+    }
 }

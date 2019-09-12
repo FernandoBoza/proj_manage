@@ -1,7 +1,9 @@
 package com.starter_kit.auth.Company.Teams;
 
+import com.starter_kit.auth.Company.Teams.Projects.Project;
 import com.starter_kit.auth.Users.User;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -14,6 +16,8 @@ public class Team {
     private String name;
     private String creator;
     private List<User> users = new ArrayList<>();
+    @DBRef
+    private List<Project> projects = new ArrayList<>();
     private boolean privacy = false;
 
     @Override
@@ -38,6 +42,18 @@ public class Team {
         this.name = name;
         this.creator = creator;
     }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
+
+    public void addProject(Project project) { this.projects.add(project); }
+
+    public void removeProject(Project project) { this.projects.remove(project); }
 
     public String getId() {
         return id;

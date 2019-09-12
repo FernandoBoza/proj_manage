@@ -22,12 +22,9 @@ public class CompanyService {
     public Company createCompany(String user_id, Company company) {
         User u = getFromOptional(userRepo.findById(user_id));
         if (u.getCompanyID() == null && u.getRole().equals(ADMIN)) {
-            company.setCreator(user_id);
-            companyRepo.save(company);
-            u.setCompanyID(company.getId());
-            userRepo.save(u);
-            company.addUser(u);
-            return companyRepo.save(company);
+            company.setCreator(user_id); // first adds the user ID as the Company.creator
+            companyRepo.save(company); // SAVES the company with creator and name, returning the !!! companyID !!!
+            return addUser(company.getId() ,u.getId()); // add the user with companyID to the company
         } else {
             return null;
         }
@@ -54,9 +51,9 @@ public class CompanyService {
     public Company removeUser(String compId, String userId) {
         User user = getFromOptional(userRepo.findById(userId));
         Company c = getFromOptional(companyRepo.findById(compId));
-        user.setCompanyID(null);
-        userRepo.save(user);
         if (c.getUsers().contains(user)) {
+            user.setCompanyID(null);
+            userRepo.save(user);
             c.removeUser(user);
             return companyRepo.save(c);
         } else {
