@@ -9,6 +9,7 @@ import com.starter_kit.auth.Users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.starter_kit.auth.Utils.Utils.getFromOptional;
@@ -54,8 +55,11 @@ public class TaskService {
     }
 
     public Task createComment(String task_id, Comment comment, String user_id) {
+        System.out.println("FROM TASK SERVICE user id :" + user_id);
         Task t = findTaskById(task_id);
         comment.setUser(userService.findById(user_id));
+        comment.setPostDate(new Date());
+        commentRepo.save(comment);
         t.addComment(comment);
         return taskRepo.save(t);
     }

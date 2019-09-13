@@ -36,7 +36,7 @@ public class TeamService {
             team.addUser(u);
             c.addTeam(team);
             companyRepo.save(c);
-            return team;
+            return teamRepo.save(team);
         } else {
             return null;
         }

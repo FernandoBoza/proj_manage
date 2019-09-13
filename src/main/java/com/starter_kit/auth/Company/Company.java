@@ -17,7 +17,7 @@ public class Company {
     private String creator;
     @DBRef
     private List<User> users = new ArrayList<>();
-    @DBRef
+//    @DBRef
     private List<Team> teams = new ArrayList<>();
 
     public Company() {}
