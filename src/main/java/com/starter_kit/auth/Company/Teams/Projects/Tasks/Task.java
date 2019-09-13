@@ -21,6 +21,21 @@ public class Task {
     @DBRef
     private List<Comment> comments = new ArrayList<>();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Task task = (Task) o;
+
+        return getId() != null ? getId().equals(task.getId()) : task.getId() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId() != null ? getId().hashCode() : 0;
+    }
+
     public Task() {}
 
     public Task(String name) {

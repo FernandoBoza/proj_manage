@@ -13,6 +13,21 @@ public class Comment {
     private Date postDate;
     private String message;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Comment comment = (Comment) o;
+
+        return getId() != null ? getId().equals(comment.getId()) : comment.getId() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId() != null ? getId().hashCode() : 0;
+    }
+
     public Comment() {}
 
     public Comment(User user, String message) {
