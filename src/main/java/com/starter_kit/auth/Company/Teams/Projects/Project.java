@@ -1,5 +1,6 @@
 package com.starter_kit.auth.Company.Teams.Projects;
 
+import com.starter_kit.auth.Company.Teams.Projects.Tasks.Task;
 import com.starter_kit.auth.Users.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
