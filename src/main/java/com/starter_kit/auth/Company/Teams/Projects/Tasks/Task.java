@@ -1,7 +1,6 @@
 package com.starter_kit.auth.Company.Teams.Projects.Tasks;
 
-import com.starter_kit.auth.Company.Teams.Projects.Comment;
-import com.starter_kit.auth.Users.User;
+import com.starter_kit.auth.Company.Teams.Projects.Tasks.Comments.Comment;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,8 +13,8 @@ public class Task {
     @Id
     private String id;
     private String name;
-    private User creator;
-    private User assignee;
+    private String creator;
+    private String assignee;
     private Date dueDate;
     private String description;
     private List<Comment> comments = new ArrayList<>();
@@ -32,6 +31,14 @@ public class Task {
 
     public void setName(String name) { this.name = name; }
 
+    public String getCreator() { return creator; }
+
+    public void setCreator(String creator) { this.creator = creator; }
+
+    public String getAssignee() { return assignee; }
+
+    public void setAssignee(String assignee) { this.assignee = assignee; }
+
     public Date getDueDate() { return dueDate; }
 
     public void setDueDate(Date dueDate) { this.dueDate = dueDate; }
@@ -43,4 +50,14 @@ public class Task {
     public List<Comment> getComments() { return comments; }
 
     public void setComments(List<Comment> comments) { this.comments = comments; }
+
+    public List<Comment> addComment(Comment comment){
+        this.comments.add(comment);
+        return this.comments;
+    }
+
+    public List<Comment> removeComment(Comment comment){
+        this.comments.remove(comment);
+        return this.comments;
+    }
 }

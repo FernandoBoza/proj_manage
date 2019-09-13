@@ -3,6 +3,7 @@ package com.starter_kit.auth.Company.Teams.Projects;
 import com.starter_kit.auth.Company.Teams.Projects.Tasks.Task;
 import com.starter_kit.auth.Users.User;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ public class Project {
     @Id
     private String id;
     private String name;
+    @DBRef
     private List<User> users = new ArrayList<>();
+    @DBRef
     private List<Task> tasks = new ArrayList<>();
     private boolean privacy = false;
 

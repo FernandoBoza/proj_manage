@@ -1,4 +1,4 @@
-package com.starter_kit.auth.Company.Teams.Projects;
+package com.starter_kit.auth.Company.Teams.Projects.Tasks.Comments;
 
 import com.starter_kit.auth.Users.User;
 import org.springframework.data.annotation.Id;
@@ -10,23 +10,23 @@ import java.util.Date;
 public class Comment {
     @Id
     private String id;
-    private User User;
-    private Date postDate;
+    private User user;
+    private Date postDate = new Date();
     private String message;
 
     public Comment() {}
 
     public Comment(User user, Date postDate, String message) {
-        User = user;
+        this.user = user;
         this.postDate = postDate;
         this.message = message;
     }
 
     public String getId() { return id; }
 
-    public User getUser() { return User; }
+    public User getUser() { return user; }
 
-    public void setUser(User user) { User = user; }
+    public void setUser(User user) { this.user = user; }
 
     public Date getPostDate() { return postDate; }
 
