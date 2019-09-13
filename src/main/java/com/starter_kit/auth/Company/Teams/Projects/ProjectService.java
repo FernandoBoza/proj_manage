@@ -22,14 +22,16 @@ public class ProjectService {
         this.teamRepo = teamRepo;
     }
 
-    public Project createProject(Project project, String team_id) {
-        return projectRepo.save(project);
+    public Team createProject(Project project, String team_id) {
+        Team t = getFromOptional(teamRepo.findById(team_id));
+        projectRepo.save(project);
+        t.addProject(project);
+        return teamRepo.save(t);
     }
 
     public Team deleteProject(String project_id, String team_id) {
-        Project p = getFromOptional(projectRepo.findById(project_id));
-        projectRepo.delete(p);
-        return getFromOptional(teamRepo.findById(team_id));
+        projectRepo.delete(getFromOptional(projectRepo.findById(project_id)));
+        return teamRepo.findTeamById(team_id);
     }
 
     public Project addProjectUser(String project_id, String user_id) {

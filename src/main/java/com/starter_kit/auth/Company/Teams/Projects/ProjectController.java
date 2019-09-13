@@ -13,7 +13,7 @@ public class ProjectController {
     ProjectService projectService;
 
     @PostMapping(value = "/create/{team_id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Project createProject(@RequestBody Project project, @PathVariable String team_id) {
+    public Team createProject(@RequestBody Project project, @PathVariable String team_id) {
         return projectService.createProject(project, team_id);
     }
 
