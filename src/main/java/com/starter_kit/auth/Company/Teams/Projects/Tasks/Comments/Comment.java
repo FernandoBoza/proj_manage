@@ -6,19 +6,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document
 public class Comment {
     @Id
     private String id;
     private User user;
-    private Date postDate = new Date();
+    private Date postDate;
     private String message;
 
     public Comment() {}
 
-    public Comment(User user, Date postDate, String message) {
+    public Comment(User user, String message) {
         this.user = user;
-        this.postDate = postDate;
+        this.postDate = new Date();
         this.message = message;
     }
 

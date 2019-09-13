@@ -2,6 +2,7 @@ package com.starter_kit.auth.Company.Teams.Projects.Tasks;
 
 import com.starter_kit.auth.Company.Teams.Projects.Tasks.Comments.Comment;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Task {
     private String assignee;
     private Date dueDate;
     private String description;
+    @DBRef
     private List<Comment> comments = new ArrayList<>();
 
     public Task() {}
@@ -51,13 +53,7 @@ public class Task {
 
     public void setComments(List<Comment> comments) { this.comments = comments; }
 
-    public List<Comment> addComment(Comment comment){
-        this.comments.add(comment);
-        return this.comments;
-    }
+    public void addComment(Comment comment){ this.comments.add(comment); }
 
-    public List<Comment> removeComment(Comment comment){
-        this.comments.remove(comment);
-        return this.comments;
-    }
+    public void removeComment(Comment comment){ this.comments.remove(comment); }
 }

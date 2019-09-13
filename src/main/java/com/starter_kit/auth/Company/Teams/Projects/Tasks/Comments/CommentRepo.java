@@ -1,4 +1,6 @@
 package com.starter_kit.auth.Company.Teams.Projects.Tasks.Comments;
 
-public interface CommentRepo {
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface CommentRepo extends MongoRepository<Comment, String> {
 }
