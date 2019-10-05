@@ -10,19 +10,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static com.starter_kit.auth.Utils.Constants.ADMIN;
-import static com.starter_kit.auth.Utils.Constants.USER;
 import static com.starter_kit.auth.Utils.Utils.getFromOptional;
 
 
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
+
+    @Autowired
+    private RoleRepo roleRepo;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -33,20 +33,11 @@ public class UserService implements UserDetailsService {
 
     }
 
-    public User createUser(User user) {
-        User userExist = findUserByEmail(user.getEmail());
-        if (userExist != null) {
-            return null;
-        } else {
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
-            if (user.getRole() == null) {
-                user.setRole(ADMIN);
-            } else {
-                user.setRole(USER);
-            }
-            return userRepo.save(user);
-        }
+    public void createUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        Role userRole = roleRepo.findByRole("ADMIN");
+        user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
+        userRepo.save(user);
     }
 
     public User findUserByEmail(String email) {
@@ -69,17 +60,18 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepo.findUserByEmail(email);
         if (user != null) {
-            List<GrantedAuthority> authorities = getUserAuthority(user.getRole());
+            List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
             return buildUserForAuthentication(user, authorities);
         } else {
             throw new UsernameNotFoundException("user not found");
         }
     }
 
-    private List<GrantedAuthority> getUserAuthority(String userRoles) {
+    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(userRoles));
-
+        userRoles.forEach((role) -> {
+            roles.add(new SimpleGrantedAuthority(role.getRole()));
+        });
         return new ArrayList<>(roles);
     }
 

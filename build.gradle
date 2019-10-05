@@ -20,6 +20,8 @@ repositories {
 }
 
 dependencies {
+	runtimeOnly 'javax.xml.bind:jaxb-api:2.3.1'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.springframework.security:spring-security-core:5.1.6.RELEASE'

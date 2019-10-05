@@ -5,7 +5,6 @@ import com.starter_kit.auth.Users.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.starter_kit.auth.Utils.Constants.ADMIN;
 import static com.starter_kit.auth.Utils.Utils.getFromOptional;
 
 @Service
@@ -21,7 +20,7 @@ public class CompanyService {
 
     public Company createCompany(String user_id, Company company) {
         User u = getFromOptional(userRepo.findById(user_id));
-        if (u.getCompanyID() == null && u.getRole().equals(ADMIN)) {
+        if (u.getCompanyID() == null) {
             company.setCreator(user_id); // first adds the user ID as the Company.creator
             companyRepo.save(company); // SAVES the company with creator and name, returning the !!! companyID !!!
             return addUser(company.getId() ,u.getId()); // add the user with companyID to the company
