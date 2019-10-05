@@ -22,9 +22,6 @@ public class UserService implements UserDetailsService {
     private final UserRepo userRepo;
 
     @Autowired
-    private RoleRepo roleRepo;
-
-    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
@@ -35,8 +32,7 @@ public class UserService implements UserDetailsService {
 
     public void createUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        Role userRole = roleRepo.findByRole("ADMIN");
-        user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
+        user.setRole("ADMIN");
         userRepo.save(user);
     }
 
@@ -60,18 +56,16 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepo.findUserByEmail(email);
         if (user != null) {
-            List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
+            List<GrantedAuthority> authorities = getUserAuthority(user.getRole());
             return buildUserForAuthentication(user, authorities);
         } else {
             throw new UsernameNotFoundException("user not found");
         }
     }
 
-    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
+    private List<GrantedAuthority> getUserAuthority(String userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        userRoles.forEach((role) -> {
-            roles.add(new SimpleGrantedAuthority(role.getRole()));
-        });
+        roles.add(new SimpleGrantedAuthority(userRoles));
         return new ArrayList<>(roles);
     }
 

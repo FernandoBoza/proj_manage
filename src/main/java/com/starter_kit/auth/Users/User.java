@@ -3,20 +3,15 @@ package com.starter_kit.auth.Users;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.index.IndexDirection;
-import org.springframework.data.mongodb.core.index.Indexed;
-import java.util.Set;
 
 @Document
 public class User {
     @Id
     private String id;
-    @Indexed(unique = true, direction = IndexDirection.DESCENDING, dropDups = true)
     private String name;
     private String password;
     private String email;
-    @DBRef
-    private Set<Role> roles;
+    private String role;
     private String companyID;
     private String imageURL;
 
@@ -38,13 +33,13 @@ public class User {
     public User() {
     }
 
-//    public User(String name, String password, String email, Set<Role> role, String companyID) {
-//        this.name = name;
-//        this.password = password;
-//        this.email = email;
-//        this.roles = role;
-//        this.companyID = companyID;
-//    }
+    public User(String name, String password, String email, String role, String companyID) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.companyID = companyID;
+    }
 
     public String getId() {
         return id;
@@ -74,12 +69,12 @@ public class User {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getCompanyID() {

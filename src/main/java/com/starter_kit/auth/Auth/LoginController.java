@@ -48,9 +48,9 @@ public class LoginController {
         try {
             String email = data.getEmail();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, data.getPassword()));
-            String token = jwtTokenProvider.createToken(email, this.users.findUserByEmail(email).getRoles());
+            String token = jwtTokenProvider.createToken(email,data.getRole());
             Map<Object, Object> model = new HashMap<>();
-            model.put("email", email);
+            model.put("user", userService.findUserByEmail(email));
             model.put("token", token);
             return ok(model);
         } catch (AuthenticationException e) {
