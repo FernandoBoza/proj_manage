@@ -1,0 +1,142 @@
+navbar {
+  position: relative;
+  height: fit-content;
+  width: 100%;
+  display: block;
+  ul {
+    display: flex;
+    justify-content: space-between;
+
+    &.navbar {
+      top: 1rem;
+      width: 100%;
+      position: static;
+      padding: 0.5rem 0;
+      align-items: center;
+    }
+
+    &.menu li {
+      cursor: pointer;
+      margin: 0 2rem 0 1rem;
+      border-bottom: 2px solid transparent;
+
+      &:hover {
+        color: $primary;
+      }
+
+      &.active {
+        border-color: $primary;
+      }
+    }
+
+    li {
+      &.logo {
+        width: 100px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .barScroll {
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    height: 3px;
+    display: block;
+    position: absolute;
+    border-radius: 36px;
+    background: $primary;
+  }
+}
+
+features,
+landing-page {
+  color: $base;
+  width: 100vw;
+  height: 100%;
+  padding: 0rem 1rem 1rem 1rem;
+  display: block;
+  background: $white;
+  position: relative;
+
+  ::selection {
+    background: $primary;
+    color: $white;
+  }
+
+  img {
+    pointer-events: none;
+  }
+
+  h1.title {
+    margin: 0;
+    font-size: 2rem;
+    &::after {
+      content: "";
+      width: 30%;
+      height: 3px;
+      background: $primary;
+      display: block;
+    }
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: #5165ff;
+  }
+
+  p {
+    color: #555;
+    line-height: 1.5;
+    font-size: 1.3rem;
+    margin: 1rem 0;
+  }
+
+  button.resolve {
+    width: 50%;
+    font-size: 1.3rem;
+  }
+
+  .container {
+    height: 90vh;
+    overflow: scroll;
+    margin: 0;
+
+    li {
+      box-shadow: unset;
+      border: unset;
+      border-radius: unset;
+      margin-bottom: unset;
+      padding: unset;
+      background: unset;
+    }
+  }
+
+  .col {
+    margin-bottom: 4rem;
+  }
+
+  .col-2 {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    .left,
+    .right {
+      width: 100%;
+      display: flex;
+      align-self: center;
+      position: relative;
+      flex-direction: column;
+
+      img {
+        width: inherit;
+      }
+    }
+  }
+
+  .col-3 {
+    display: grid;
+    grid-gap: 4rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

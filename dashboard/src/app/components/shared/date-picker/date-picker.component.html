@@ -1,0 +1,23 @@
+<button class="resolve due_date" (click)="showDatePicker()"><i class="fal fa-stopwatch"></i> Due date
+  {{dueDate}}</button>
+<div class="calendar" [class.show]="datePickerToggle">
+  <h1 class="title">
+    <i (click)="changeMonth('left')" class="fas fa-chevron-left"></i>
+    <span (click)="changeMonth('current')">{{currentMonth.split(' ').slice(0, -1).join(' ')}}</span>
+    <i (click)="changeMonth('right')" class="fas fa-chevron-right"></i>
+    <span class="year">{{currentMonth.split(' ').slice(-1).join(' ')}}</span>
+  </h1>
+  <ul class="week col_header">
+    <li class="{{day.short}}" [class.currentDay]="dayOfWeek == day.long" *ngFor="let day of daysLabel">
+      {{day.short}}
+    </li>
+  </ul>
+  <ul class="week row">
+    <li class="day {{day.label}}" *ngFor="let day of month" (click)="selectDate(day.fullDate)"
+      [class.today]="day.fullDate == today">
+      <span class="day_number">{{day.day}}</span>
+    </li>
+  </ul>
+</div>
+
+<div class="overlay clear" [class.active]="datePickerToggle" (click)="datePickerToggle = false"></div>

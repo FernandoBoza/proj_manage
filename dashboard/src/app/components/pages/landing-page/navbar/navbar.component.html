@@ -1,0 +1,18 @@
+<ul class="navbar">
+  <li class="logo" routerLink="/">
+    <img src="../../../../assets/imgs/logo_dark.svg">
+  </li>
+
+  <ul class="center menu">
+    <li>About</li>
+    <li routerLink="/features" routerLinkActive="active">Features</li>
+    <li>Pricing</li>
+    <li>Contact</li>
+  </ul>
+
+  <ul class="right menu">
+    <li routerLink="/login">Sign in</li>
+    <li routerLink="/register">Register</li>
+  </ul>
+</ul>
+<div class="barScroll" [style.width]="barWidth"></div>

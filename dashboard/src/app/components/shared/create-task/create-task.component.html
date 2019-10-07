@@ -1,0 +1,19 @@
+<h2>Add a new task</h2>
+
+<input-text [label]="'Task title'"></input-text>
+
+<div class="input_container">
+  <span class="text_label">Task description</span>
+  <textarea></textarea>
+</div>
+
+<div class="task_items">
+  <date-picker (dateSelected)="dateSelect($event)"></date-picker>
+  <dropdown-user (userSelected)="userSelected($event)"></dropdown-user>
+</div>
+
+
+<ul class="modal_btns">
+  <li class="reject">Cancel</li>
+  <li class="resolve">Create Task</li>
+</ul>

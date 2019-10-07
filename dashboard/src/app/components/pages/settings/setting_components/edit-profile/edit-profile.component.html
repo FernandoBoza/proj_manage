@@ -1,0 +1,13 @@
+<h1>Edit Profile</h1>
+<ul>
+  <li>
+    <img-holder [src]="user.imageURL">
+    </img-holder>
+    <span class="img_whiteout"></span>
+    <span class="new_img"><i class="fas fa-camera-alt"></i></span>
+  </li>
+  <input-text (value)="getValFromTxtCompo($event, 'name')" [label]="'Full Name'" [model]="user.name"></input-text>
+  <input-text (value)="getValFromTxtCompo($event, 'email')" [label]="'Email'" [model]="user.email" [type]="'email'">
+  </input-text>
+  <li style="width: 100%"><button class="resolve" (click)="updateProfile()">Update Profile</button></li>
+</ul>

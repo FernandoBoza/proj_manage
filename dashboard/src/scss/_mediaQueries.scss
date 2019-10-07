@@ -1,0 +1,67 @@
+@media only screen and (max-width: 414px) {
+  app-root {
+    grid-template-columns: 1fr;
+
+    .chat_widget,
+    i.fas.fa-comments-alt.toggle {
+      display: none;
+    }
+  }
+
+  .sidebar {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1;
+  }
+
+  login section {
+    &.form_container {
+      padding: 0;
+
+      img.signup_left {
+        left: unset;
+        transform: none !important;
+      }
+
+      .form {
+        position: absolute;
+        width: 90%;
+        top: 2%;
+
+        .input_container {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+
+    &.form_toggle.left,
+    &.form_toggle.right {
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 11rem;
+
+      img {
+        display: none;
+      }
+    }
+  }
+
+  .content admin {
+    display: flex;
+    flex-direction: column;
+
+    section.two .tasks {
+      position: relative;
+    }
+
+    ul.department_blocks {
+      width: 348px;
+
+      li.department ul {
+        width: 182px;
+      }
+    }
+  }
+}

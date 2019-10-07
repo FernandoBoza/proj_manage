@@ -1,0 +1,98 @@
+<section class="left">
+  <h1 class="title">Projects</h1>
+  <input-search [model]=""></input-search>
+  <ul class="projects container">
+    <li *ngFor="let project of projects; let index = index" (click)="selectProject(project, index)"
+      [class.selected]="selected == index">
+      <h2>{{project.title}}</h2>
+      <span>{{project.department}}</span>
+      <div class="btm">
+        <span>{{getProjectRatio(project.tasks)}}</span>
+        <div class="users">
+          <img-holder *ngFor="let img of project.followers | slice:0:3" [src]="img"></img-holder>
+          <span style="color: white;margin-left: .2rem;"> + {{project.followers.length - 3}}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <i tooltip="Create project" placement="left" class="add circle primary fal fa-plus" (click)="showCreateProject()"></i>
+</section>
+<section class="right">
+  <section *ngIf="project_or_create_project == 1" class="project_layout">
+    <!-- top layer -->
+    <ul class="user_top_right" style="display: flex;justify-content: space-between;">
+      <li>
+        <h1 class="title">{{projectLayout.title}}</h1>
+        <p><i class="fas fa-calendar-check"></i> {{projectLayout.dueDate}}</p>
+      </li>
+      <li>
+        <i tooltip="Add user" placement="bottom" class="fal fa-plus circle primary"></i>
+        <h2>{{projectLayout.followers.length - 3}} +</h2>
+        <div class="users_status">
+          <img-holder *ngFor="let img of projectLayout.followers | slice:0:3" [src]="img"></img-holder>
+          <i class="fas fa-circle"></i>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Files and Task panel -->
+
+    <div class="files_task_toggle">
+      <h2 (click)="toggleFileTask('Files')" [class.selected]="filetaskOption">Files</h2>
+      <h2 (click)="toggleFileTask('Tasks')" [class.selected]="!filetaskOption">Tasks</h2>
+    </div>
+
+    <div class="option_container files" [class.files_selected]="filetaskOption">
+      <div class="file_grid">
+        <div class="file_holder" *ngFor="let file of projectLayout.files">
+          <ul class="img_info_options">
+            <li>
+              <h2>{{file.fileName}}</h2>
+              <span>
+                {{file.uploader}} <i class="fas fa-circle"></i> {{file.fileSize}}
+              </span>
+            </li>
+            <li>
+              <i class="fal fa-arrow-to-bottom circle primary"></i>
+            </li>
+          </ul>
+          <img src="{{file.src}}">
+        </div>
+      </div>
+    </div>
+    <div class="option_container tasks" [class.tasks_selected]="!filetaskOption">
+      <div class="grid__one_two_col">
+        <ul class="project_status_toggle">
+          <span class="bg" [class.selected]="project_toggle"></span>
+          <li (click)="toggle_project(true)">In progress</li>
+          <li (click)="toggle_project(false)">Completed</li>
+        </ul>
+
+        <div class="progress_bar">
+          <span class="progress"></span>
+        </div>
+      </div>
+
+      <ul class="task_card_container">
+        <li class="task_card" *ngFor="let task of projectLayout.tasks">
+          <i class="fas fa-ellipsis-v"></i>
+          <h3>{{task.title}}</h3>
+          <div class="progress_bar">
+            <span class="progress"></span>
+          </div>
+          <p class="description">{{task.description}}</p>
+          <span><i class="fas fa-calendar"></i> {{task.dueDate}}</span>
+          <span><i class="fas fa-user-circle"></i> {{task.creator}}</span>
+          <ul>
+            <img-holder *ngFor="let img of task.followers" [src]="img"></img-holder>
+          </ul>
+          <i class="fas fa-external-link"></i>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section *ngIf="project_or_create_project == 2" class="new_project">
+    <h1>Create Project</h1>
+    <input-text [class]="'project'" [label]="'Title'" [model]="project.title"></input-text>
+  </section>
+</section>
