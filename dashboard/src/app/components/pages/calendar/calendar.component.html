@@ -1,0 +1,34 @@
+<section class="left" [class.dual_grid]="col_toggle">
+  <h1 class="title">
+    <i (click)="changeMonth('left')" class="fas fa-chevron-left"></i>
+    <ul>
+      <li class="year">{{currentMonth.split(' ').slice(-1).join(' ')}}</li>
+      <li (click)="changeMonth('current')">{{currentMonth.split(' ').slice(0, -1).join(' ')}}</li>
+    </ul>
+    <i (click)="changeMonth('right')" class="fas fa-chevron-right"></i>
+  </h1>
+  <div class="calendar">
+    <ul class="week col_header">
+      <li class="{{day.short}}" [class.currentDay]="dayOfWeek == day.long" *ngFor="let day of daysLabel">
+        <span>{{day.long}}</span>
+      </li>
+    </ul>
+    <ul class="week row">
+      <li class="day {{day.label}}" *ngFor="let day of month" [class.today]="day.fullDate == today">
+        <span class="day_number" (click)="createTask(day)">{{day.day}}</span>
+        <span class="task_length" *ngIf="day.tasks != undefined"
+          (click)="expandCalendar(day)">{{ day.tasks.length }}</span>
+      </li>
+    </ul>
+  </div>
+</section>
+<section class="right" [class.dual_grid]="col_toggle">
+  <i class="fas fa-times" (click)="expandCalendar()"></i>
+  <h1 class="currentDay">{{currentDay}}</h1>
+  <ul *ngIf="!taskToggle">
+    <task *ngFor="let task of currentTasks" [task]="task"></task>
+  </ul>
+  <div *ngIf="taskToggle">
+    <create-task></create-task>
+  </div>
+</section>

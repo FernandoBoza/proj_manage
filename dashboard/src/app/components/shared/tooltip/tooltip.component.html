@@ -1,0 +1,4 @@
+<div *ngIf="options['contentType'] === 'template' else htmlOrStringTemplate"></div>
+<ng-template #htmlOrStringTemplate>
+   <div [innerHTML]="value"></div>
+</ng-template>

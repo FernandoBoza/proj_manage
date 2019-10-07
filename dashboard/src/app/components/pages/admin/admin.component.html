@@ -1,0 +1,47 @@
+<section class="one">
+   <h1 class="title" routerLink="/projects"><i class="fas fa-chart-bar"></i> Project Performance</h1>
+</section>
+<section class="two">
+   <h1 class="title" routerLink="/tasks"><i class="fas fa-tasks"></i> Tasks</h1>
+   <ul class="tasks">
+      <li *ngFor="let task of tasks_completed">
+         <p>{{task.title}}</p>
+         <span>
+            {{task.author}}
+            <i class="fas fa-circle"></i>
+            {{task.department}}
+            <i class="fas fa-circle"></i>
+            {{task.dateLog}}
+         </span>
+      </li>
+   </ul>
+
+</section>
+<section class="three">
+   <h1 class="title" routerLink="/departments"><i class="fas fa-users"></i> Departments</h1>
+   <ul class="department_blocks">
+      <li class="department" *ngFor="let dep of departments">
+         <span>
+            <span class="department_title">{{dep.label}}</span>
+            <i class="fas fa-ellipsis-h"></i></span>
+         <ul>
+            <li class="department_user" *ngFor="let user of users">
+               <img-holder [src]="user.img"></img-holder>
+               <span>{{user.name}}</span>
+            </li>
+         </ul>
+      </li>
+   </ul>
+</section>
+<section class="four">
+   <h1 class="title" routerLink="/notifications"><i class="fas fa-bell"></i> Notifications</h1>
+   <ul class="notifications">
+      <li *ngFor="let notif of notifications">
+         <span class="{{notif.status}}"> <i class="fas fa-circle"></i> </span>
+         <span>{{notif.message}}</span>
+         <span>{{notif.timelog}}</span>
+         <i class="fas fa-external-link-alt"></i>
+         <i class="fas fa-times"></i>
+      </li>
+   </ul>
+</section>

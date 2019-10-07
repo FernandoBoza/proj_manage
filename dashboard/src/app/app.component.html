@@ -1,0 +1,35 @@
+<div *ngIf="isLoggedIn" class="notification_card" [class.show]="notif_card">
+  <i class="fas fa-times" (click)="close_notif()"></i>
+  <h1 class="title">{{util.notif_info.title}}</h1>
+  <p>{{util.notif_info.body}}</p>
+</div>
+
+<i *ngIf="isLoggedIn" class="fas fa-comments-alt toggle" [class.fa-compress-alt]="expanded" (click)="expandChat()"></i>
+<div class="chat_widget" [class.expanded]="expanded">
+  <div *ngIf="expanded">
+    <p>
+      <i (click)="show_notif()" class="fas fa-comment-alt-lines"></i>
+      Chat
+    </p>
+
+    <ul>
+      <li *ngFor="let user of users">
+        <img-holder [class.online]="user.online" [src]="user.img"></img-holder>
+        <span>{{user.name}}</span>
+        <span>Lorem ipsum dolo...</span>
+      </li>
+    </ul>
+  </div>
+</div>
+<section class="sidebar" *ngIf="isLoggedIn">
+  <ul>
+    <li tooltip="{{i.label}}" placement="right" *ngFor="let i of menu" routerLink="/{{i.url}}"
+      [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+      <span class="notification" *ngIf="i.notification > 0">{{i.notification}}</span>
+      <i class="fal {{i.icon}}"></i>
+    </li>
+  </ul>
+</section>
+<section class="content">
+  <router-outlet></router-outlet>
+</section>

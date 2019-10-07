@@ -1,0 +1,10 @@
+<ul class="dropdown">
+  <button (click)="toggleDropDown()" class="resolve">
+    <img-holder *ngIf="selectedUser.img != ''" [src]="selectedUser.img"></img-holder> <span>{{selectedUser.name}}</span>
+  </button>
+  <ul class="items" [class.show]="dropdownToggle">
+    <li (click)="selectUser(user)" *ngFor="let user of mockUser">
+      <img-holder [src]="user.img"></img-holder> <span>{{user.name}}</span>
+    </li>
+  </ul>
+</ul>

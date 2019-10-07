@@ -1,0 +1,22 @@
+<section class="left" [class.dual_grid]="col_toggle">
+  <ul class="category_toggle">
+    <li class="new_task" (click)="expandTask()">New Task</li>
+    <li [class.selected]="selected == 1" (click)="select_task_category(1)">All</li>
+    <li [class.selected]="selected == 2" (click)="select_task_category(2)">Pending</li>
+    <li [class.selected]="selected == 3">Overdue</li>
+    <li [class.selected]="selected == 4" (click)="select_task_category(4)">Completed</li>
+  </ul>
+  <ul class="tasks">
+    <li *ngFor="let task of selectTaskCategory" (click)="expandTask(task)" [class.selected]="selectedTask == task">
+      <p>{{task.dateLog}}</p>
+      <p>{{task.title}}</p>
+      <p><span class="{{task.status}}">{{getStatus(task.status)}}</span></p>
+      <p class="department">{{task.department}}</p>
+    </li>
+  </ul>
+</section>
+<section class="right" [class.dual_grid]="col_toggle">
+  <i class="fas fa-times" (click)="closePanel()"></i>
+  <task *ngIf="selectedTask != null" [task]="selectedTask"></task>
+  <create-task *ngIf="selectedTask == null"></create-task>
+</section>

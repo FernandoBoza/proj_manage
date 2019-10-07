@@ -1,0 +1,9 @@
+<div class="input_container {{class}}">
+  <label for="{{label}}">{{label}}</label>
+  <input *ngIf="type != 'password'" (keyup)="change()" [disabled]="disabled" type="{{type}}" id="{{label}}"
+    [(ngModel)]="model">
+  <input *ngIf="type == 'password'" (keyup)="change()" [disabled]="disabled"
+    type="{{passwordViewToggle ? 'text' : 'password'}}" id="{{label}}" [(ngModel)]="model">
+  <i *ngIf="type == 'password'" class="fal fa-fw {{passwordViewToggle ? 'fa-eye' : 'fa-eye-slash'}}"
+    (click)="togglePasswordView()"></i>
+</div>

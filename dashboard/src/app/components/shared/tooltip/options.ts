@@ -1,0 +1,23 @@
+export const defaultOptions = {
+   'placement': 'top',
+   'autoPlacement': true,
+   'contentType': 'string',
+   'showDelay': 0,
+   'hideDelay': 100,
+   'hideDelayMobile': 0,
+   'hideDelayTouchscreen': 0,
+   'zIndex': 0,
+   'animationDuration': 300,
+   'animationDurationDefault': 300,
+   'trigger': 'hover',
+   'tooltipClass': '',
+   'display': true,
+   'displayMobile': true,
+   'displayTouchscreen': true,
+   'shadow': true,
+   'theme': 'dark',
+   'offset': 8,
+   'maxWidth': '',
+   'id': false,
+   'hideDelayAfterClick': 2000
+}

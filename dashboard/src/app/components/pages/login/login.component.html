@@ -1,0 +1,126 @@
+<section class="form_toggle" [class.left]="toggle == 'login'" [class.right]="toggle == 'register'"
+   [class.hide]="show_process">
+   <h1 *ngIf="isLoadingResults ">Loading</h1>
+   <ul class="btn_container">
+      <li class="login">
+         <img src="../../../assets/imgs/signup_right.svg" alt="taeki sign up">
+         <p>Already registered?</p>
+         <button class="resolve" (click)="toggleViews('login')">
+            <h1>Login</h1>
+         </button>
+      </li>
+      <li class="register">
+         <img src="../../../assets/imgs/login_left.svg" alt="taeki sign up">
+         <h1>New?</h1>
+         <p>sign up for a free account.</p>
+         <button class="resolve" (click)="toggleViews('register')">
+            <h1>Sign up</h1>
+         </button>
+      </li>
+   </ul>
+</section>
+
+<section class="form_container" [class.login]="toggle == 'login'" [class.register]="toggle == 'register'">
+   <img class="login_right" src="../../../assets/imgs/login_right.svg">
+   <img class="signup_left" src="../../../assets/imgs/signup_left.svg">
+   <ul class="form login">
+      <li>
+         <h1>Welcome Back</h1>
+      </li>
+      <li class="input_container" [class.error]="err.email.length != 0">
+         <span>{{err.email}}</span>
+         <label for="login_email" class="label">Email</label>
+         <input id="login_email" [(ngModel)]="user.email" type="email">
+      </li>
+      <li class="input_container" [class.error]="err.password.length != 0">
+         <span>{{err.password}}</span>
+         <label for="login_password" class="label">Password</label>
+         <input id="login_password" (keyup.enter)="login()" [(ngModel)]="user.password"
+            type="{{passwordViewToggle ? 'text' : 'password'}}">
+         <i class="fal fa-fw {{passwordViewToggle ? 'fa-eye' : 'fa-eye-slash'}}" (click)="togglePasswordView()"></i>
+      </li>
+      <li class="resolve" (click)="login()">
+         <h1>Login</h1>
+         <span>{{err.noAccount}}</span>
+      </li>
+   </ul>
+   <div class="form register" [class.process_form]="show_process">
+      <ul [class.hide]="show_process">
+         <li>
+            <h1>Welcome to Taeki</h1>
+         </li>
+         <li class="input_container" [class.error]="err.name.length != 0">
+            <span>{{err.name}}</span>
+            <label for="regi_name" class="label">name</label>
+            <input [(ngModel)]="user.name" id="regi_name" type="text">
+         </li>
+         <li class="input_container" [class.error]="err.email.length != 0">
+            <span>{{err.email}}</span>
+            <label for="regi_email" class="label">email</label>
+            <input [(ngModel)]="user.email" id="regi_email" type="text">
+         </li>
+         <li class="input_container" [class.error]="err.password.length != 0">
+            <span>{{err.password}}</span>
+            <label for="regi_password" class="label">password</label>
+            <input [(ngModel)]="user.password" id="regi_password" type="{{passwordViewToggle ? 'text' : 'password'}}"
+               (keyup.enter)="register()">
+            <i class="fal fa-fw {{passwordViewToggle ? 'fa-eye' : 'fa-eye-slash'}}" (click)="togglePasswordView()"></i>
+         </li>
+         <li class="input_container" [class.error]="confirmedPassword != user.password">
+            <label for="confirm_password" class="label">confirm password</label>
+            <input [(ngModel)]="confirmedPassword" id="confirm_password"
+               type="{{passwordViewToggle ? 'text' : 'password'}}" (keyup.enter)="register()">
+            <i class="fal fa-fw {{passwordViewToggle ? 'fa-eye' : 'fa-eye-slash'}}" (click)="togglePasswordView()"></i>
+         </li>
+         <li class="checkbox_container">
+            <input id="terms_condition" [(ngModel)]="terms_condition" type="checkbox" [checked]="terms_condition">
+            <label for="terms_condition" class="label">I agree to the
+               <span (click)="showTerms($event)">terms and condition</span>
+            </label>
+         </li>
+         <li class="company_or_personal">
+            <ul>
+               <li>
+                  <input id="com_true" [value]="true" (change)="selectType($event)" [(ngModel)]="company_personal"
+                     type="radio">
+                  <label for="com_true" class="label">Company</label>
+               </li>
+               <li>
+                  <input id="com_false" [value]="false" (change)="selectType($event)" [(ngModel)]="company_personal"
+                     type="radio">
+                  <label for="com_false" class="label">Private</label>
+               </li>
+            </ul>
+         </li>
+         <li class="resolve" [class.disabled]="!terms_condition" (click)="register()">
+            <h1>Register</h1>
+         </li>
+      </ul>
+      <div class="process" [class.hide]="!show_process">
+         <h1>Sign up process</h1>
+         <div class="step">
+            <p [class.selected]="step == 1"><span>1</span> About your company</p>
+            <p [class.selected]="step == 2"><span>2</span> About you</p>
+         </div>
+      </div>
+      <div class="process_right" [class.hide]="!show_process">
+         <div class="step_one" [class.show]="step == 1">
+            <h1>Tell us about your company</h1>
+            <input-text (value)="getValFromTxtCompo($event, 'name')" [label]="'Company name'" [model]="company.name">
+            </input-text>
+            <input-text (value)="getValFromTxtCompo($event, 'website')" [label]="'Company website (optional)'"
+               [model]="company.website"></input-text>
+            <button class="resolve" (click)="confirmUser()">Next</button>
+         </div>
+         <div class="step_two" [class.show]="step == 2">
+            <h1>Confirm your infomation</h1>
+         </div>
+      </div>
+   </div>
+</section>
+
+<div class="overlay" [class.active]="term_modal" (click)="term_modal = false"></div>
+
+<div class="modal" [class.show]="term_modal">
+   <p>Terms and condition go here</p>
+</div>

@@ -1,0 +1,26 @@
+<section>
+  <h1 class="title">Notifications</h1>
+  <div class="_container">
+    <ul class="notifications_container" *ngFor="let notif of notifications">
+      <li class="date">{{notif.date}}</li>
+      <li class="notification_row" *ngFor="let n of notif.notifArray">
+        <i class="fal {{notifIcon(n.department)}} {{n.status}}"></i>
+        <img-holder [src]="n.src"></img-holder>
+        <div class="name_status">
+          <h2>
+            {{n.user.split(' ').slice(0, -1).join(' ')}}
+            <span style="font-weight: bold">{{n.user.split(' ').slice(-1).join(' ')}}</span>
+          </h2>
+          <span class="update">Task Updated</span>
+        </div>
+        <div class="notification_title">
+          <h2>{{n.task_title}}</h2>
+          <span>updated description</span>
+        </div>
+        <p>{{n.department}}</p>
+        <i class="fal fa-external-link"></i>
+        <i class="fal fa-times"></i>
+      </li>
+    </ul>
+  </div>
+</section>

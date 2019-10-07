@@ -1,0 +1,32 @@
+<section class="left">
+  <h1>Settings</h1>
+  <ul>
+    <li class="title">
+      <h2><i class="fal fa-user"></i> Account</h2>
+    </li>
+    <li (click)="selectSettings(1)" [class.selected]="selected == 1">Edit profile <i class="fal fa-chevron-right"></i>
+    </li>
+    <li (click)="selectSettings(2)" [class.selected]="selected == 2">Change password <i
+        class="fal fa-chevron-right"></i></li>
+  </ul>
+  <ul>
+    <li class="title">
+      <h2><i class="fal fa-bell"></i> Notifications</h2>
+    </li>
+    <li>Notifications <i class="fal fa-chevron-right"></i></li>
+    <li>Browser notifications <i class="fal fa-chevron-right"></i></li>
+  </ul>
+  <ul>
+    <li class="title">
+      <h2><i class="fal fa-plus-circle"></i> More</h2>
+    </li>
+    <li>Language <i class="fal fa-chevron-right"></i></li>
+    <li>Country <i class="fal fa-chevron-right"></i></li>
+  </ul>
+
+  <p class="logout" routerLink="/login"><i class="fad fa-sign-out-alt"></i> Logout</p>
+</section>
+<section class="right">
+  <edit-profile *ngIf="selected == 1"></edit-profile>
+  <change-password *ngIf="selected == 2"></change-password>
+</section>
