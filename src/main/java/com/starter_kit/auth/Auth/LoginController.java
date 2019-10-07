@@ -37,11 +37,6 @@ public class LoginController {
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 
-//    @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    public UserDetails login(@RequestBody User user) {
-//        return userService.loadUserByUsername(user.getEmail());
-//    }
-
     @SuppressWarnings("rawtypes")
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User data) {
@@ -67,14 +62,10 @@ public class LoginController {
         }
         userService.createUser(user);
         Map<Object, Object> model = new HashMap<>();
+        model.put("user", userService.findUserByEmail(user.getEmail()));
         model.put("message", "User registered successfully");
         return ok(model);
     }
-//
-//    @PostMapping(path = "/register", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//    public User createUser(@RequestBody User user) {
-//        return userService.createUser(user);
-//    }
 
     @GetMapping(path = "/dashboard")
     public User forwardToDashboard() {

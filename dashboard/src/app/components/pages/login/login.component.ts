@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { User } from 'src/app/models/User';
 import { Router } from '@angular/router';
 import { UserServiceService } from 'src/app/services/user-service.service';
+import {CompanyService} from "../../../services/company.service";
 
 @Component({
   selector: 'login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private location: Location,
     private us: UserServiceService,
+    private cs: CompanyService,
     private router: Router
   ) { }
 
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit {
   public user: User = new User();
   public company: any = {
     name: "",
-    website: ""
+    website: "",
+    creator: ""
   };
 
   public step: number = 1;
@@ -38,7 +41,7 @@ export class LoginComponent implements OnInit {
     password: [],
     name: [],
     noAccount: "",
-  }
+  };
 
   ngOnInit() {
     if (location.href == "http://localhost:4200/register") {
@@ -80,34 +83,53 @@ export class LoginComponent implements OnInit {
   }
 
   public register() {
-    // if (this.terms_condition && this.validationUserSignUp()) {
-    //   this.us.register(this.user)
-    //     .subscribe(res => {
-    //       this.toggle = "login"
-    //     }, (err) => {
-    //       console.log(err);
-    //       alert(err.error);
-    //     });
-    // }
-
-    if (this.company_personal) {
-      this.show_process = true;
+    if (this.terms_condition && this.validationUserSignUp()) {
+      if (this.company_personal) {
+        this.show_process = true;
+      } else {
+        this.us.register(this.user)
+          .subscribe(res => {
+            this.toggle = "login"
+          }, (err) => {
+            console.log(err);
+            alert(err.error);
+          });
+      }
     }
   }
 
+  public createCompany() {
+    this.us.register(this.user)
+      .subscribe(res => {
+        this.toggle = "login";
+        this.company.creator = res.user.id;
+        this.cs.createCompany(this.company).subscribe( res => {
+            console.log(res);
+          }, (err) =>{
+            console.log(err);
+          }
+        )
+      }, (err) => {
+        console.log(err);
+        alert(err.error);
+      });
+
+
+  }
+
   public validationUserSignUp() {
-    this.flushErr()
+    this.flushErr();
     let email = this.user.email;
     let name = this.user.name;
     let password = this.user.password;
 
-    if (email == "" || email == null || email == undefined) {
+    if (email == "" || email == null) {
       this.err.email.push("Please enter an email")
     } else if (!this.validateEmail(email)) {
       this.err.email.push("Not a valid email")
     }
 
-    if (name == "" || name == null || name == undefined) {
+    if (name == "" || name == null) {
       this.err.name.push("Please enter a name")
     }
 

@@ -132,10 +132,10 @@
             <h1>Confirm your infomation</h1>
             <input-text [model]="user.name" [label]="'Name'"></input-text>
             <input-text [model]="user.email" [label]="'Email'"></input-text>
-            <input-text [model]="user.password" [label]="'Password'"></input-text>
+            <input-text [model]="user.password" [type]="'password'" [label]="'Password'"></input-text>
             <ul class="btn_group">
                <li><button class="reject" (click)="step = 1">Back</button></li>
-               <li><button class="resolve" (click)="register()">Register</button></li>
+               <li><button class="resolve" (click)="createCompany()">Register</button></li>
             </ul>
          </div>
       </div>
