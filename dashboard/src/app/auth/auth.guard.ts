@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
   }
 
   checkLogin(url: string): boolean {
-    let token = localStorage.getItem('token')
+    let token = localStorage.getItem('token');
     if (this.us.isLoggedIn) {
       return true;
     }

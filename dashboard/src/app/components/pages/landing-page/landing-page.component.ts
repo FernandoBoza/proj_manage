@@ -9,7 +9,7 @@ export class LandingPageComponent implements OnInit {
 
   constructor(private lp: LandingPageService) { }
 
-  public src: string = "../../../../assets/imgs/landing_page/"
+  public src: string = "../../../../assets/imgs/landing_page/";
   @ViewChild('container') container: ElementRef;
 
   ngOnInit() {

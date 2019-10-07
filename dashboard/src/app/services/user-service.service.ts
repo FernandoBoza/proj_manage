@@ -11,6 +11,7 @@ import { catchError, tap } from 'rxjs/operators';
 
 export class UserServiceService {
   public user: User;
+  // CHANGE TO FALSE WHEN NOT USING SPRING SERVICE
   public isLoggedIn: boolean = false;
   public redirectUrl: string;
   private api = 'http://localhost:8080/';

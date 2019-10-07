@@ -20,13 +20,17 @@ export class LoginComponent implements OnInit {
   public toggle: String = "login";
   public terms_condition: boolean = false;
   public term_modal: boolean = false;
+  public privacy_modal: boolean;
   public passwordViewToggle: boolean = false;
   public confirmedPassword: string;
   public isLoadingResults: boolean = false;
   public show_process: boolean = false;
 
   public user: User = new User();
-  public company: any = {}
+  public company: any = {
+    name: "",
+    website: ""
+  };
 
   public step: number = 1;
   public err = {
@@ -46,12 +50,12 @@ export class LoginComponent implements OnInit {
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.keyCode === 27) {
       this.term_modal = false;
+      this.privacy_modal = false;
     }
   }
 
   public confirmUser() {
     this.step = 2;
-    console.log(this.company);
   }
 
   public getValFromTxtCompo(e?: string, name?: string) {
@@ -64,7 +68,7 @@ export class LoginComponent implements OnInit {
     if (this.validationUserLogin()) {
       this.us.login(this.user)
         .subscribe(res => {
-          this.us.user = res.user
+          this.us.user = res.user;
           if (res.token) {
             localStorage.setItem('token', res.token);
             this.router.navigate(['dashboard']);
@@ -179,9 +183,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  public showTerms(evt: Event) {
-    evt.preventDefault();
+  public showTerms() {
     this.term_modal = !this.term_modal;
   }
 
+  public showPrivacy() {
+    this.privacy_modal = !this.privacy_modal;
+  }
+
+  closeModal() {
+    this.privacy_modal = false;
+    this.term_modal = false;
+  }
 }

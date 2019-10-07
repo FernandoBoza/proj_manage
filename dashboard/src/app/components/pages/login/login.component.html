@@ -74,8 +74,11 @@
          </li>
          <li class="checkbox_container">
             <input id="terms_condition" [(ngModel)]="terms_condition" type="checkbox" [checked]="terms_condition">
-            <label for="terms_condition" class="label">I agree to the
-               <span (click)="showTerms($event)">terms and condition</span>
+            <label for="terms_condition" class="label">
+               I agree to the
+               <span (click)="showTerms()">Terms of service</span>
+               and
+               <span (click)="showPrivacy()">Privacy policy</span>
             </label>
          </li>
          <li class="company_or_personal">
@@ -97,10 +100,20 @@
          </li>
       </ul>
       <div class="process" [class.hide]="!show_process">
-         <h1>Sign up process</h1>
+         <div class="title">
+            <h1 [class.show]="step == 1">Sign up process</h1>
+            <h1 [class.show]="step == 2">Almost there</h1>
+         </div>
          <div class="step">
             <p [class.selected]="step == 1"><span>1</span> About your company</p>
             <p [class.selected]="step == 2"><span>2</span> About you</p>
+         </div>
+         <div class="footer">
+            <i [class.show]="step == 1" class="fad fa-info-circle"></i>
+            <i [class.show]="step == 2" class="fad fa-user-circle"></i>
+            <p [class.show]="step == 1">We just need some basic information to set up your account with company details
+            </p>
+            <p [class.show]="step == 2">Now to just confirm your infomation</p>
          </div>
       </div>
       <div class="process_right" [class.hide]="!show_process">
@@ -110,17 +123,45 @@
             </input-text>
             <input-text (value)="getValFromTxtCompo($event, 'website')" [label]="'Company website (optional)'"
                [model]="company.website"></input-text>
-            <button class="resolve" (click)="confirmUser()">Next</button>
+            <ul class="btn_group">
+               <li><button class="resolve info" (click)="register()">Finish later</button></li>
+               <li><button class="resolve" (click)="confirmUser()">Next</button></li>
+            </ul>
          </div>
          <div class="step_two" [class.show]="step == 2">
             <h1>Confirm your infomation</h1>
+            <input-text [model]="user.name" [label]="'Name'"></input-text>
+            <input-text [model]="user.email" [label]="'Email'"></input-text>
+            <input-text [model]="user.password" [label]="'Password'"></input-text>
+            <ul class="btn_group">
+               <li><button class="reject" (click)="step = 1">Back</button></li>
+               <li><button class="resolve" (click)="register()">Register</button></li>
+            </ul>
          </div>
       </div>
    </div>
 </section>
 
-<div class="overlay" [class.active]="term_modal" (click)="term_modal = false"></div>
+<div class="overlay" [class.active]="term_modal || privacy_modal" (click)="closeModal()"></div>
 
 <div class="modal" [class.show]="term_modal">
-   <p>Terms and condition go here</p>
+   <h1>Terms & Condition</h1>
+   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, debitis ducimus libero magnam minus placeat quasi
+      repellendus. Excepturi harum necessitatibus nostrum qui quos ratione voluptatum. At dolor doloribus enim eveniet
+      fuga, minima, nisi officiis possimus quibusdam tempore velit voluptas voluptate voluptatibus. Asperiores
+      doloremque enim eos perspiciatis, porro reprehenderit sequi tempora tenetur totam vel! Consectetur dolorem earum
+      et ipsum iste itaque neque porro qui. Ad, adipisci enim necessitatibus non nostrum quae unde. Ab accusamus aliquam
+      blanditiis cupiditate eligendi error expedita illum iste itaque iure libero molestiae molestias natus omnis optio
+      quae quaerat quas quia recusandae repellendus, reprehenderit rerum veniam veritatis voluptatum.</p>
+</div>
+
+<div class="modal" [class.show]="privacy_modal">
+   <h1>Privacy Policy</h1>
+   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, debitis ducimus libero magnam minus placeat quasi
+      repellendus. Excepturi harum necessitatibus nostrum qui quos ratione voluptatum. At dolor doloribus enim eveniet
+      fuga, minima, nisi officiis possimus quibusdam tempore velit voluptas voluptate voluptatibus. Asperiores
+      doloremque enim eos perspiciatis, porro reprehenderit sequi tempora tenetur totam vel! Consectetur dolorem earum
+      et ipsum iste itaque neque porro qui. Ad, adipisci enim necessitatibus non nostrum quae unde. Ab accusamus aliquam
+      blanditiis cupiditate eligendi error expedita illum iste itaque iure libero molestiae molestias natus omnis optio
+      quae quaerat quas quia recusandae repellendus, reprehenderit rerum veniam veritatis voluptatum.</p>
 </div>
