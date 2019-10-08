@@ -42,7 +42,6 @@ export class UserServiceService {
       .pipe(
         tap(_ => {
           this.util.notif_info.title = "Profile Update";
-          this.util.notif_info.body = "";
           this.util.show_notif();
           _
         }),
@@ -55,7 +54,6 @@ export class UserServiceService {
       .pipe(
         tap(_ => {
           this.util.notif_info.title = "Password updated";
-          this.util.notif_info.body = "";
           this.util.show_notif();
           _
         }),

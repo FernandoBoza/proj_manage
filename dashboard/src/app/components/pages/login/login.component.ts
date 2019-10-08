@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit {
           this.us.user = res.user;
           if (res.token) {
             localStorage.setItem('token', res.token);
+            localStorage.setItem("loggedIn", "true");
             this.router.navigate(['dashboard']).then(r => r);
             this.getCompanyInfo();
           } else {

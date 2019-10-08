@@ -42,7 +42,7 @@ export class ChangePasswordComponent implements OnInit {
 
   }
 
-  // TODO BUG > on update, the value on the inouts in the edit-profile html doesn't show the name and email
+  // TODO BUG > on update, the value on the inputs in the edit-profile html doesn't show the name and email
   public updatePassword() {
     if (this.validationUserSignUp()) {
       this.user.password = this.newPassword;

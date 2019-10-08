@@ -9,15 +9,15 @@ export class UtilsService {
 
   public notif_card: boolean = false;
   public notif_info: any = {
-    title: "This is fake data",
-    body: "Lorem ipsum dolor sit, amet consectetur adipisicing."
-  }
+    title: "",
+    body: ""
+  };
 
   public show_notif() {
     this.notif_card = true;
     setTimeout(() => {
       this.notif_card = false;
-    }, 5000);
+    }, 3500);
   }
 
   public close_notif() {
