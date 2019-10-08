@@ -4,6 +4,7 @@ import { User } from 'src/app/models/User';
 import { Router } from '@angular/router';
 import { UserServiceService } from 'src/app/services/user-service.service';
 import {CompanyService} from "../../../services/company.service";
+import Util from "../../../Util";
 
 @Component({
   selector: 'login',
@@ -125,61 +126,16 @@ export class LoginComponent implements OnInit {
 
   public validationUserSignUp() {
     this.flushErr();
-    let email = this.user.email;
-    let name = this.user.name;
-    let password = this.user.password;
-
-    if (email == "" || email == null) {
-      this.err.email.push("Please enter an email")
-    } else if (!this.validateEmail(email)) {
-      this.err.email.push("Not a valid email")
-    }
-
-    if (name == "" || name == null) {
-      this.err.name.push("Please enter a name")
-    }
-
-    if (password == "" || password == null || password == undefined) {
-      this.err.password.push("Please enter a password")
-    } else if (password.length < 8) {
-      this.err.password.push("Please enter a password 8 or more characters long")
-    } else if (password != this.confirmedPassword) {
-      this.err.password.push("Password doesn't match")
-    }
-
-    if (this.err.email.length == 0 && this.err.name.length == 0 && this.err.password.length == 0) {
-      return true
-    } else {
-      return false
-    }
+    return Util.validationUserSignUp(this.user.email,this.user.name, this.user.password, this.confirmedPassword, this.err)
   }
 
   public validationUserLogin() {
-    this.flushErr()
-    let email = this.user.email;
-    let password = this.user.password;
-
-    if (email == "" || email == null || email == undefined) {
-      this.err.email.push("Please enter an email")
-    } else if (!this.validateEmail(email)) {
-      this.err.email.push("Not a valid email")
-    }
-    if (password == "" || password == null || password == undefined) {
-      this.err.password.push("Please enter a password")
-    } else if (password.length < 8) {
-      this.err.password.push("Please enter a password 8 or more characters long")
-    }
-
-    if (this.err.email.length == 0 && this.err.password.length == 0) {
-      return true
-    } else {
-      return false
-    }
+    this.flushErr();
+    return Util.validationUserLogin(this.user.email, this.user.password, this.err)
   }
 
   public validateEmail(email: String) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
+    return Util.validateEmail(email)
   }
 
   public flushErr() {

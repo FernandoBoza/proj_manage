@@ -2398,6 +2398,12 @@ tooltip.tooltip-show {
   }
 }
 
+span.error {
+  color: $danger;
+  margin-bottom: 1.4rem;
+  display: block;
+}
+
 input-text {
   &.error {
     label { color: $danger};

@@ -19,6 +19,7 @@ export class EditProfileComponent implements OnInit {
   public company: Company = this.cs.company;
 
   ngOnInit() {
+    console.log(this.user);
   }
 
   public getValFromTxtCompo(e?: string, name?: string) {

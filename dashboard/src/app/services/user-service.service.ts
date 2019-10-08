@@ -3,6 +3,7 @@ import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import {UtilsService} from "./utils.service";
 
 
 @Injectable({
@@ -15,7 +16,10 @@ export class UserServiceService {
   public redirectUrl: string;
   private api = 'http://localhost:8080/';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private util: UtilsService,
+  ) { }
 
   public login(data: any): Observable<any> {
     return this.http.post<any>(`${this.api}login`, data)
@@ -36,7 +40,12 @@ export class UserServiceService {
   public updateUser(user: User):Observable<any> {
     return this.http.put<any>(`${this.api}user/update`, user)
       .pipe(
-        tap(_ => _),
+        tap(_ => {
+          this.util.notif_info.title = "Profile Update";
+          this.util.notif_info.body = "";
+          this.util.show_notif();
+          _
+        }),
         catchError(this.handleError("updating user", []))
       )
   }
@@ -44,7 +53,12 @@ export class UserServiceService {
   public updateUserPassword(user: User):Observable<any> {
     return this.http.put<any>(`${this.api}user/update/password`, user)
       .pipe(
-        tap(_ => _),
+        tap(_ => {
+          this.util.notif_info.title = "Password updated";
+          this.util.notif_info.body = "";
+          this.util.show_notif();
+          _
+        }),
         catchError(this.handleError("updating user", []))
       )
   }

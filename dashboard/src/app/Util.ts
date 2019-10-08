@@ -2,14 +2,56 @@ import * as moment from 'moment';
 
 export default class Utils {
 
+  public static validateEmail(email: String) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+
+  public static validationUserSignUp(email, name, password, confirmedPassword, err) {
+
+    if (email == "" || email == null) {
+      err.email.push("Please enter an email")
+    } else if (!this.validateEmail(email)) {
+      err.email.push("Not a valid email")
+    }
+
+    if (name == "" || name == null) {
+      err.name.push("Please enter a name")
+    }
+
+    if (password == "" || password == null) {
+      err.password.push("Please enter a password")
+    } else if (password.length < 8) {
+      err.password.push("Please enter a password 8 or more characters long")
+    } else if (password != confirmedPassword) {
+      err.password.push("Password doesn't match")
+    }
+
+    return err.email.length == 0 && err.name.length == 0 && err.password.length == 0;
+  }
+
+  public static validationUserLogin(email, password, err?) {
+    if (email == "" || email == null) {
+      err.email.push("Please enter an email")
+    } else if (!this.validateEmail(email)) {
+      err.email.push("Not a valid email")
+    }
+    if (password == "" || password == null) {
+      err.password.push("Please enter a password")
+    } else if (password.length < 8) {
+      err.password.push("Please enter a password 8 or more characters long")
+    }
+    return err.email.length == 0 && err.password.length == 0;
+  }
+
    public static getStatus(status: string) {
       let x: string;
       switch (status) {
          case "in_progress":
-            x = "In Progress"
+            x = "In Progress";
             break;
          case "complete":
-            x = "Complete"
+            x = "Complete";
             break;
          default:
             break;
