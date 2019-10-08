@@ -2398,6 +2398,13 @@ tooltip.tooltip-show {
   }
 }
 
+input-text {
+  &.error {
+    label { color: $danger};
+    input {  border-color: $danger}
+  }
+}
+
 .step_one,
 .step_two {
   opacity: 0;

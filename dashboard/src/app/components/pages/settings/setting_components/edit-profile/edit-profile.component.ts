@@ -26,7 +26,9 @@ export class EditProfileComponent implements OnInit {
   }
 
   public updateProfile() {
-    console.log(this.user);
+    this.us.updateUser(this.user).subscribe(res => {
+      this.us.user = res;
+    })
   }
 
 }

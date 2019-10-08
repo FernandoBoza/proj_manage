@@ -33,6 +33,22 @@ export class UserServiceService {
       );
   }
 
+  public updateUser(user: User):Observable<any> {
+    return this.http.put<any>(`${this.api}user/update`, user)
+      .pipe(
+        tap(_ => _),
+        catchError(this.handleError("updating user", []))
+      )
+  }
+
+  public updateUserPassword(user: User):Observable<any> {
+    return this.http.put<any>(`${this.api}user/update/password`, user)
+      .pipe(
+        tap(_ => _),
+        catchError(this.handleError("updating user", []))
+      )
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead
