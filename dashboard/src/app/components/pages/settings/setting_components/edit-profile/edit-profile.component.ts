@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { UserServiceService } from 'src/app/services/user-service.service';
+import {CompanyService} from "../../../../../services/company.service";
+import {Company} from "../../../../../models/Company";
 
 @Component({
   selector: 'edit-profile',
@@ -8,9 +10,13 @@ import { UserServiceService } from 'src/app/services/user-service.service';
 })
 export class EditProfileComponent implements OnInit {
 
-  constructor(private us: UserServiceService) { }
+  constructor(
+    private us: UserServiceService,
+    private cs: CompanyService
+  ) { }
 
   public user: User = this.us.user;
+  public company: Company = this.cs.company;
 
   ngOnInit() {
   }

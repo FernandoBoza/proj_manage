@@ -1,6 +1,6 @@
-package com.starter_kit.auth.Company.Teams.Projects;
+package com.starter_kit.auth.Company.Department.Projects;
 
-import com.starter_kit.auth.Company.Teams.Team;
+import com.starter_kit.auth.Company.Department.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ public class ProjectController {
     ProjectService projectService;
 
     @PostMapping(value = "/create/{team_id}", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Team createProject(@RequestBody Project project, @PathVariable String team_id) {
+    public Department createProject(@RequestBody Project project, @PathVariable String team_id) {
         return projectService.createProject(project, team_id);
     }
 
@@ -23,7 +23,7 @@ public class ProjectController {
     }
 
     @DeleteMapping(value = "/id/{project_id}/team/{team_id}")
-    public Team deleteProject(@PathVariable String project_id, @PathVariable String team_id) {
+    public Department deleteProject(@PathVariable String project_id, @PathVariable String team_id) {
         return projectService.deleteProject(project_id, team_id);
     }
 

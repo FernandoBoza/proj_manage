@@ -1,8 +1,7 @@
-package com.starter_kit.auth.Company.Teams.Projects.Tasks.Comments;
+package com.starter_kit.auth.Company.Department.Projects.Tasks.Comments;
 
 import com.starter_kit.auth.Users.User;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 

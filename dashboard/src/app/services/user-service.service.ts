@@ -15,7 +15,6 @@ export class UserServiceService {
   public redirectUrl: string;
   private api = 'http://localhost:8080/';
 
-
   constructor(private http: HttpClient) { }
 
   public login(data: any): Observable<any> {
@@ -33,7 +32,6 @@ export class UserServiceService {
         catchError(this.handleError('register', []))
       );
   }
-
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

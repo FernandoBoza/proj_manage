@@ -74,12 +74,20 @@ export class LoginComponent implements OnInit {
           this.us.user = res.user;
           if (res.token) {
             localStorage.setItem('token', res.token);
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['dashboard']).then(r => r);
+            this.getCompanyInfo();
           } else {
             this.err.noAccount = "No account found";
           }
         })
     }
+  }
+
+  public getCompanyInfo(){
+    return this.cs.getCompanyInfo(this.us.user.companyID)
+      .subscribe(res => {
+      this.cs.company = res;
+    })
   }
 
   public register() {
@@ -113,8 +121,6 @@ export class LoginComponent implements OnInit {
         console.log(err);
         alert(err.error);
       });
-
-
   }
 
   public validationUserSignUp() {

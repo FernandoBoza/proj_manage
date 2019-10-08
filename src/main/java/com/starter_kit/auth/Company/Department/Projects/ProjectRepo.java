@@ -1,4 +1,4 @@
-package com.starter_kit.auth.Company.Teams.Projects;
+package com.starter_kit.auth.Company.Department.Projects;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

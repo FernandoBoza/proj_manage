@@ -66,17 +66,4 @@ public class LoginController {
         model.put("message", "User registered successfully");
         return ok(model);
     }
-
-    @GetMapping(path = "/dashboard")
-    public User forwardToDashboard() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return userService.findUserByEmail(auth.getName());
-    }
-
-    @GetMapping(path = "/dashboard/user")
-    public User forwardToUserDashboard() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return userService.findUserByEmail(auth.getName());
-    }
-
 }
