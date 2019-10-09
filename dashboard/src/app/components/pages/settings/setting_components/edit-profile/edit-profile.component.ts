@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { UserServiceService } from 'src/app/services/user-service.service';
-import {CompanyService} from "../../../../../services/company.service";
-import {Company} from "../../../../../models/Company";
+import {MediaService} from "../../../../../services/media.service";
 
 @Component({
   selector: 'edit-profile',
@@ -12,6 +11,7 @@ export class EditProfileComponent implements OnInit {
 
   constructor(
     private us: UserServiceService,
+    private ms: MediaService
   ) { }
 
   public user: User = this.us.user;
@@ -26,13 +26,19 @@ export class EditProfileComponent implements OnInit {
   }
 
   public updateProfile() {
-    this.us.updateUser(this.user).subscribe(res => {
-      this.us.user = res;
-    })
+    // this.us.updateUser(this.user).subscribe(res => {
+    //   this.us.user = res;
+    // })
+    this.uploadMedia()
   }
 
   onFileChanged(evt: any) {
     this.selectedFile = evt.target.files[0];
-    console.log(this.selectedFile);
+  }
+
+  private uploadMedia(){
+    this.ms.uploadMedia(this.selectedFile).subscribe(res => {
+      console.log(res);
+    })
   }
 }

@@ -1,4 +1,5 @@
 import * as moment from 'moment';
+import {Observable, of} from "rxjs";
 
 export default class Utils {
 
@@ -81,6 +82,14 @@ export default class Utils {
     const c = 1024, d = b || 2, e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
       f = Math.floor(Math.log(a) / Math.log(c));
     return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
+  }
+
+  public static handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error); // log to console instead
+      console.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 
 }

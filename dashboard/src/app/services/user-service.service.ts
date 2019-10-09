@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {UtilsService} from "./utils.service";
-
+import Util from "../Util";
 
 @Injectable({
   providedIn: 'root'
@@ -63,11 +63,12 @@ export class UserServiceService {
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); // log to console instead
-      console.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
+    // return (error: any): Observable<T> => {
+    //   console.error(error); // log to console instead
+    //   console.log(`${operation} failed: ${error.message}`);
+    //   return of(result as T);
+    // };
+    return Util.handleError(operation, result)
   }
 
   public mockUser: any[] = [
