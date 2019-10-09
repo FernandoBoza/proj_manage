@@ -1,14 +1,10 @@
 <h1>Edit Profile</h1>
-
-<p>{{company.name}}</p>
-<span>{{user.name}}</span>
-
 <ul>
   <li>
-    <img-holder [src]="user.imageURL">
-    </img-holder>
+    <img-holder [src]="user.imageURL"></img-holder>
     <span class="img_whiteout"></span>
-    <span class="new_img"><i class="fas fa-camera-alt"></i></span>
+    <span class="new_img" (click)="fileInput.click()"><i class="fas fa-camera-alt"></i></span>
+    <input style="display: none"  type="file" (change)="onFileChanged($event)" #fileInput>
   </li>
   <input-text (value)="getValFromTxtCompo($event, 'name')" [label]="'Full Name'" [model]="user.name"></input-text>
   <input-text (value)="getValFromTxtCompo($event, 'email')" [label]="'Email'" [model]="user.email" [type]="'email'">

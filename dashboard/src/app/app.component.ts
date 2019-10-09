@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { UserServiceService } from './services/user-service.service';
+import {Component} from '@angular/core';
+import {UserServiceService} from './services/user-service.service';
 import CONSTANTS from './services/Constants';
-import { UtilsService } from './services/utils.service';
+import {UtilsService} from './services/utils.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +11,14 @@ export class AppComponent {
   constructor(
     private user: UserServiceService,
     public util: UtilsService
-  ) { }
+  ) {
+  }
 
   public expanded: boolean = false;
   public menu = CONSTANTS.menu;
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   public get isLoggedIn(): boolean {
     return this.user.isLoggedIn;

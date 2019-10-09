@@ -12,14 +12,13 @@ export class EditProfileComponent implements OnInit {
 
   constructor(
     private us: UserServiceService,
-    private cs: CompanyService
   ) { }
 
   public user: User = this.us.user;
-  public company: Company = this.cs.company;
+  public selectedFile: File;
+
 
   ngOnInit() {
-    console.log(this.user);
   }
 
   public getValFromTxtCompo(e?: string, name?: string) {
@@ -32,4 +31,8 @@ export class EditProfileComponent implements OnInit {
     })
   }
 
+  onFileChanged(evt: any) {
+    this.selectedFile = evt.target.files[0];
+    console.log(this.selectedFile);
+  }
 }

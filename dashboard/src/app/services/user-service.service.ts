@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { User } from '../models/User';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {User} from '../models/User';
+import {HttpClient} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
 import {UtilsService} from "./utils.service";
 
 
@@ -19,7 +19,8 @@ export class UserServiceService {
   constructor(
     private http: HttpClient,
     private util: UtilsService,
-  ) { }
+  ) {
+  }
 
   public login(data: any): Observable<any> {
     return this.http.post<any>(`${this.api}login`, data)
@@ -32,12 +33,12 @@ export class UserServiceService {
   public register(data: any): Observable<any> {
     return this.http.post<any>(`${this.api}register`, data)
       .pipe(
-        tap(_ => console.log("login")),
+        tap(_ => console.log(_)),
         catchError(this.handleError('register', []))
       );
   }
 
-  public updateUser(user: User):Observable<any> {
+  public updateUser(user: User): Observable<any> {
     return this.http.put<any>(`${this.api}user/update`, user)
       .pipe(
         tap(_ => {
@@ -49,7 +50,7 @@ export class UserServiceService {
       )
   }
 
-  public updateUserPassword(user: User):Observable<any> {
+  public updateUserPassword(user: User): Observable<any> {
     return this.http.put<any>(`${this.api}user/update/password`, user)
       .pipe(
         tap(_ => {

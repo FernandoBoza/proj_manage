@@ -44,35 +44,43 @@ export default class Utils {
     return err.email.length == 0 && err.password.length == 0;
   }
 
-   public static getStatus(status: string) {
-      let x: string;
-      switch (status) {
-         case "in_progress":
-            x = "In Progress";
-            break;
-         case "complete":
-            x = "Complete";
-            break;
-         default:
-            break;
-      }
-      return x
-   }
+  public static getStatus(status: string) {
+    let x: string;
+    switch (status) {
+      case "in_progress":
+        x = "In Progress";
+        break;
+      case "complete":
+        x = "Complete";
+        break;
+      default:
+        break;
+    }
+    return x
+  }
 
-   public static getDaysArray(dateString: any) {
-      let year = dateString.split(' ').slice(0, -1).join(' ')
-      let month = dateString.split(' ').slice(-1).join(' ')
-      const date = new Date(year, month - 1, 1);
-      const names = Object.freeze(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']);
-      const result = []
-      while (date.getMonth() == month - 1) {
-         result.push({
-            day: `${date.getDate()}`,
-            label: `${names[date.getDay()]}`,
-            fullDate: `${moment(date).format("MM/DD/YYYY")}`
-         });
-         date.setDate(date.getDate() + 1);
-      }
-      return result;
-   }
+  public static getDaysArray(dateString: any) {
+    let year = dateString.split(' ').slice(0, -1).join(' ')
+    let month = dateString.split(' ').slice(-1).join(' ')
+    const date = new Date(year, month - 1, 1);
+    const names = Object.freeze(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']);
+    const result = []
+    while (date.getMonth() == month - 1) {
+      result.push({
+        day: `${date.getDate()}`,
+        label: `${names[date.getDay()]}`,
+        fullDate: `${moment(date).format("MM/DD/YYYY")}`
+      });
+      date.setDate(date.getDate() + 1);
+    }
+    return result;
+  }
+
+  public static formatBytes(a, b) {
+    if (0 == a) return "0 Bytes";
+    const c = 1024, d = b || 2, e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
+      f = Math.floor(Math.log(a) / Math.log(c));
+    return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
+  }
+
 }
