@@ -21,7 +21,8 @@ export class AppComponent {
   }
 
   public get isLoggedIn(): boolean {
-    return this.user.isLoggedIn;
+    return true
+    // return this.user.isLoggedIn;
   }
 
   public get notif_card(): boolean {

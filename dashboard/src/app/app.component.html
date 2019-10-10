@@ -23,11 +23,16 @@
 </div>
 <section class="sidebar" *ngIf="isLoggedIn">
   <ul>
-    <li tooltip="{{i.label}}" placement="right" *ngFor="let i of menu" routerLink="/{{i.url}}"
-      [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+    <li tooltip="{{i.label}}" placement="right" *ngFor="let i of menu" routerLink="/{{i.url}}" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
       <span class="notification" *ngIf="i.notification > 0">{{i.notification}}</span>
       <i class="fal {{i.icon}}"></i>
     </li>
+  </ul>
+  <i class="fad fa-plus-circle"></i>
+  <ul class="add_new">
+    <li><i class="fal fa-plus"></i> Project</li>
+    <li><i class="fal fa-plus"></i> Department</li>
+    <li><i class="fal fa-plus"></i> Tasks</li>
   </ul>
 </section>
 <section class="content">

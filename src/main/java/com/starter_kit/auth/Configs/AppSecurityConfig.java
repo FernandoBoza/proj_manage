@@ -42,9 +42,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/company/**").permitAll()
+                .antMatchers("/dashboard/").permitAll()
                 .antMatchers("/user/**").hasAuthority("ADMIN").anyRequest().authenticated()
                 .antMatchers("/media").hasAuthority("ADMIN").anyRequest().authenticated()
-                .antMatchers("/dashboard/").hasAuthority("ADMIN").anyRequest().authenticated()
                 .and().csrf()
                 .disable().exceptionHandling().authenticationEntryPoint(unauthorizedEntryPoint()).and()
                 .apply(new JwtConfigurer(jwtTokenProvider));
