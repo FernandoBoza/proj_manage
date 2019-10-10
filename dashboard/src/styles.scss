@@ -45,6 +45,10 @@ body {
   background: $primary;
 }
 
+.info {
+  background: $info;
+}
+
 .disabled {
   opacity: 0.5;
   pointer-events: none;
@@ -82,7 +86,7 @@ app-root .circle {
   left: 25%;
   top: 10%;
   width: 50%;
-  height: 50%;
+  height: 90%;
   opacity: 0;
   padding: 1rem;
   pointer-events: none;
@@ -97,10 +101,15 @@ app-root .circle {
   }
 
   &.show {
-    top: 25%;
+    top: 5%;
     opacity: 1;
     pointer-events: all;
   }
+}
+.btn_group {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 1fr 1fr;
 }
 
 ul.modal_btns {
@@ -223,7 +232,7 @@ i.fas.fa-comments-alt.toggle {
   ul {
     margin-top: 1.4rem;
     overflow: scroll;
-    height: 90%;
+    height: 87%;
     position: absolute;
     width: 93%;
 
@@ -360,7 +369,7 @@ login {
 
       .form {
         transition: all 0.6s;
-        width: 30vw;
+        width: 31vw;
         padding: 1rem;
         background: white;
         z-index: 0;
@@ -470,11 +479,28 @@ img-holder {
 .sidebar {
   color: $gray;
   padding: 0.5rem;
+  display: flex;
   background: $block_fg;
+  flex-direction: column;
+  justify-content: space-between;
+
+  i.fa-plus-circle {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: $round_radius;
+    background: $primary;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      background: darken($primary, 5%);
+    }
+  }
 
   ul {
     list-style-type: none;
-    height: 90%;
+    height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -840,11 +866,14 @@ settings {
 
   ul {
     display: flex;
-    justify-content: space-evenly;
 
     .label {
       cursor: pointer;
       margin-left: 0.5rem;
+    }
+
+    li {
+      margin-right: 2rem;
     }
   }
 }
@@ -2322,7 +2351,60 @@ tooltip.tooltip-show {
 .process_right {
   padding: 1rem;
   background: #ccc;
+  position: relative;
   border-radius: $round_radius;
+}
+
+.process {
+  .title {
+    height: 1rem;
+    margin-bottom: 2.4rem;
+
+    h1 {
+      opacity: 0;
+      position: absolute;
+      transition: opacity 0.4s;
+
+      &.show {
+        opacity: 1;
+      }
+    }
+  }
+
+  .footer {
+    width: 91%;
+    bottom: 1rem;
+    height: 4rem;
+    display: flex;
+    position: absolute;
+
+    p {
+      opacity: 0;
+      position: absolute;
+      padding-left: 3rem;
+      transition: opacity 0.4s;
+      align-self: center;
+
+      &.show {
+        opacity: 1;
+      }
+    }
+
+    i.fad {
+      opacity: 0;
+      color: $info;
+      display: flex;
+      font-size: 2rem;
+      margin-right: 1rem;
+      align-self: center;
+      position: absolute;
+      transition: opacity 0.4s;
+
+      &.show {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .process_right {
@@ -2331,9 +2413,18 @@ tooltip.tooltip-show {
   input-text label {
     background: white;
   }
+}
 
-  button {
-    width: 50%;
+span.error {
+  color: $danger;
+  margin-bottom: 1.4rem;
+  display: block;
+}
+
+input-text {
+  &.error {
+    label { color: $danger};
+    input {  border-color: $danger}
   }
 }
 
@@ -2343,10 +2434,15 @@ tooltip.tooltip-show {
   transition: opacity 0.4s;
   pointer-events: none;
   position: absolute;
+  width: 95%;
 
   &.show {
     opacity: 1;
     pointer-events: all;
+  }
+
+  button.reject {
+    color: $info;
   }
 }
 

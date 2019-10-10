@@ -1,7 +1,7 @@
-package com.starter_kit.auth.Company.Teams.Projects.Tasks;
+package com.starter_kit.auth.Company.Department.Projects.Tasks;
 
-import com.starter_kit.auth.Company.Teams.Projects.Project;
-import com.starter_kit.auth.Company.Teams.Projects.Tasks.Comments.Comment;
+import com.starter_kit.auth.Company.Department.Projects.Project;
+import com.starter_kit.auth.Company.Department.Projects.Tasks.Comments.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

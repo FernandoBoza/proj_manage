@@ -23,7 +23,7 @@ public class CompanyService {
         if (u.getCompanyID() == null) {
             company.setCreator(user_id); // first adds the user ID as the Company.creator
             companyRepo.save(company); // SAVES the company with creator and name, returning the !!! companyID !!!
-            return addUser(company.getId() ,u.getId()); // add the user with companyID to the company
+            return addUser(company.getId() ,user_id); // add the user with companyID to the company
         } else {
             return null;
         }

@@ -1,6 +1,6 @@
-package com.starter_kit.auth.Company.Teams;
+package com.starter_kit.auth.Company.Department.Projects;
 
-import com.starter_kit.auth.Company.Teams.Projects.Project;
+import com.starter_kit.auth.Company.Department.Projects.Tasks.Task;
 import com.starter_kit.auth.Users.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Document
-public class Team {
+public class Project {
     @Id
     private String id;
     private String name;
-    private String creator;
+    @DBRef
     private List<User> users = new ArrayList<>();
     @DBRef
-    private List<Project> projects = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
     private boolean privacy = false;
 
     @Override
@@ -25,9 +25,9 @@ public class Team {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Team team = (Team) o;
+        Project project = (Project) o;
 
-        return getId() != null ? getId().equals(team.getId()) : team.getId() == null;
+        return getId() != null ? getId().equals(project.getId()) : project.getId() == null;
     }
 
     @Override
@@ -35,36 +35,14 @@ public class Team {
         return getId() != null ? getId().hashCode() : 0;
     }
 
-    public Team() {
-    }
+    public Project() { }
 
-    public Team(String name, String creator) {
+    public Project(String name) {
         this.name = name;
-        this.creator = creator;
     }
-
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
-
-    public void addProject(Project project) { this.projects.add(project); }
-
-    public void removeProject(Project project) { this.projects.remove(project); }
 
     public String getId() {
         return id;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
     }
 
     public String getName() {
@@ -75,15 +53,37 @@ public class Team {
         this.name = name;
     }
 
-    public List<User> getUsers() { return users; }
+    public List<User> getUsers() {
+        return users;
+    }
 
     public void setUsers(List<User> users) {
         this.users = users;
     }
 
-    public void addUser(User user) { this.users.add(user); }
+    public void addUser(User user) {
+        this.users.add(user);
+    }
 
-    public void removeUser(User user) { this.users.remove(user); }
+    public void removeUser(User user) {
+        this.users.remove(user);
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public void addTasks(Task tasks) {
+        this.tasks.add(tasks);
+    }
+
+    public void removeTasks(Task tasks) {
+        this.tasks.remove(tasks);
+    }
 
     public boolean isPrivacy() {
         return privacy;

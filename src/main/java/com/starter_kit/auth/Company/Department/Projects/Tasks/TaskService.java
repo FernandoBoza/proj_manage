@@ -1,10 +1,10 @@
-package com.starter_kit.auth.Company.Teams.Projects.Tasks;
+package com.starter_kit.auth.Company.Department.Projects.Tasks;
 
-import com.starter_kit.auth.Company.Teams.Projects.Project;
-import com.starter_kit.auth.Company.Teams.Projects.ProjectRepo;
-import com.starter_kit.auth.Company.Teams.Projects.ProjectService;
-import com.starter_kit.auth.Company.Teams.Projects.Tasks.Comments.Comment;
-import com.starter_kit.auth.Company.Teams.Projects.Tasks.Comments.CommentRepo;
+import com.starter_kit.auth.Company.Department.Projects.Project;
+import com.starter_kit.auth.Company.Department.Projects.ProjectRepo;
+import com.starter_kit.auth.Company.Department.Projects.ProjectService;
+import com.starter_kit.auth.Company.Department.Projects.Tasks.Comments.Comment;
+import com.starter_kit.auth.Company.Department.Projects.Tasks.Comments.CommentRepo;
 import com.starter_kit.auth.Users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.starter_kit.auth.Company.Teams.Projects.Tasks.Comments;
+package com.starter_kit.auth.Company.Department.Projects.Tasks.Comments;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

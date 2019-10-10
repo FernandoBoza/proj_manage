@@ -36,6 +36,10 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
     }
 
+    public String updateUserPassword(String updatedPassword) {
+        return bCryptPasswordEncoder.encode(updatedPassword);
+    }
+
     public User findUserByEmail(String email) {
         return userRepo.findUserByEmail(email);
     }

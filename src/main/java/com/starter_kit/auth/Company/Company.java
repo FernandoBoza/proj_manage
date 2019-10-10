@@ -1,6 +1,6 @@
 package com.starter_kit.auth.Company;
 
-import com.starter_kit.auth.Company.Teams.Team;
+import com.starter_kit.auth.Company.Department.Department;
 import com.starter_kit.auth.Users.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -15,10 +15,11 @@ public class Company {
     private String id;
     private String name;
     private String creator;
+    private String website;
     @DBRef
     private List<User> users = new ArrayList<>();
 //    @DBRef
-    private List<Team> teams = new ArrayList<>();
+    private List<Department> departments = new ArrayList<>();
 
     public Company() {}
 
@@ -53,15 +54,15 @@ public class Company {
 
     public void removeUser(User user) { this.users.remove(user); }
 
-    public List<Team> getTeams() {
-        return teams;
+    public List<Department> getDepartments() {
+        return departments;
     }
 
-    public void setTeams(List<Team> team) { this.teams = team; }
+    public void setDepartments(List<Department> department) { this.departments = department; }
 
-    public void addTeam (Team team) { this.teams.add(team); }
+    public void addTeam (Department department) { this.departments.add(department); }
 
-    public void removeTeam (Team team) { this.teams.remove(team); }
+    public void removeTeam (Department department) { this.departments.remove(department); }
 
     public String getCreator() {
         return creator;
@@ -69,5 +70,13 @@ public class Company {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 }
